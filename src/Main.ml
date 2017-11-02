@@ -1,62 +1,121 @@
-(* This line opens the Tea.App modules into the current scope for Program access functions and types *)
 open Tea.App
 
-(* This opens the Elm-style virtual-dom functions and types into the current scope *)
-open Tea.Html
-
-(* Let's create a new type here to be our main message type that is passed around *)
 type msg =
-  | Increment  (* This will be our message to increment the counter *)
-  | Decrement  (* This will be our message to decrement the counter *)
-  | Reset      (* This will be our message to reset the counter to 0 *)
-  | Set of int (* This will be out message to set the counter to a specific value *)
-  [@@bs.deriving {accessors}] (* This is a nice quality-of-life addon from Bucklescript, it will generate function names for each constructor name, optional, but nice to cut down on code, this is unused in this example but good to have regardless *)
+  | ActivateRoom of string
+  [@@bs.deriving {accessors}]
 
-(* This is optional for such a simple example, but it is good to have an `init` function to define your initial model default values, the model for Counter is just an integer *)
-let init () = 4
+module Room = struct
+  type t = {
+    name: string;
+    color: string;
+    x: int;
+    y: int;
+  }
+end
 
-(* This is the central message handler, it takes the model as the first argument *)
-let update model = function (* These should be simple enough to be self-explanatory, mutate the model based on the message, easy to read and follow *)
-  | Increment -> model + 1
-  | Decrement -> model - 1
-  | Reset -> 0
-  | Set v -> v
+type slot = {
+  name: string;
+  description: string;
+  start: int;
+  until: int;
+  roomName: string;
+}
+type model = {
+  data: slot list;
+  rooms: Room.t list;
+  activeRoom: Room.t option;
+}
 
-(* This is just a helper function for the view, a simple function that returns a button based on some argument *)
-let view_button title msg =
-  button
-    [ onClick msg
+let init () = {
+  activeRoom = None;
+  rooms = [
+    {
+        name= "Lesse";
+        color= "pink";
+        x= 310;
+        y= 220;
+    };
+    {
+        name= "LHomme";
+        color= "red";
+        x= 340;
+        y= 250;
+    };
+    {
+        name= "Semois";
+        color= "blue";
+        x= 490;
+        y= 310;
+    };
+  ];
+  data = [
+    {
+      name= "Test";
+      description= "Test description";
+      start= 1;
+      until= 1;
+      roomName= "Lesse";
+    };
+  ]
+}
+
+let safeFind f l = 
+  try Some (List.find f l)
+  with _ -> None
+
+let update model = function 
+  | ActivateRoom roomName -> 
+    let activeRoom = safeFind (fun room -> room.Room.name == roomName) model.rooms in
+    {model with activeRoom = activeRoom}
+
+
+let viewRoomCircle room =
+  let module Svg = Tea.Svg in
+  let module SvgA = Tea.Svg.Attributes in
+  let module SvgE = Tea.Svg.Events in
+  let (<$) a b = a (string_of_int b) in
+  Svg.circle [SvgA.cx <$ room.Room.x; SvgA.cy <$ room.y; SvgA.r "10"; SvgA.stroke "black"; SvgA.strokeWidth "1"; SvgA.fill room.color; Tea.Html.onClick (activateRoom room.name)] []
+
+let viewSlotInfoForRoom slots room =
+  let module Html = Tea.Html in
+  let viewSlot slot =
+    Html.div [] [
+      Html.div [] [Html.text slot.name];
+      Html.div [] [Html.text slot.description];
     ]
-    [ text title
-    ]
+  in
+  let viewSlots slots =
+    match slots with
+    | [] -> [Html.div [] [Html.text "No slots booked for this room"]]
+    | _ -> List.map viewSlot slots
+  in
+  match room with
+  | None -> Html.div [] [Html.text "Click on a room to see the booked slots"];
+  | Some room -> 
+      let slots = List.filter (fun slot -> slot.roomName == room.Room.name) slots in
+      Html.div [] [
+        Html.h1 [] [Html.text room.Room.name];
+        Html.div [] (viewSlots slots)
+      ]
 
-(* This is the main callback to generate the virtual-dom.
-  This returns a virtual-dom node that becomes the view, only changes from call-to-call are set on the real DOM for efficiency, this is also only called once per frame even with many messages sent in within that frame, otherwise does nothing *)
 let view model =
-  div
-    []
-    [ span
-        [ style "text-weight" "bold" ]
-        [ text (string_of_int model) ]
-    ; br []
-    ; view_button "Increment" Increment
-    ; br []
-    ; view_button "Decrement" Decrement
-    ; br []
-    ; view_button "Set to 42" (Set 42)
-    ; br []
-    ; if model <> 0 then view_button "Reset" Reset else noNode
+  let module Html = Tea.Html in
+  let module Svg = Tea.Svg in
+  let module SvgA = Tea.Svg.Attributes in
+  Html.div
+    [Html.class' "grid"] [
+      Html.div [] [
+        Svg.svg [SvgA.width "650px"; SvgA.height "800px"] [
+          Svg.svgimage [SvgA.xlinkHref "/floorplan.jpg"; SvgA.width "100%"; SvgA.height "100%"] [];
+          Svg.g [] (List.map viewRoomCircle model.rooms)
+        ];
+      ];
+      Html.div [] [viewSlotInfoForRoom model.data model.activeRoom]
     ]
 
-(* This is the main function, it can be named anything you want but `main` is traditional.
-  The Program returned here has a set of callbacks that can easily be called from
-  Bucklescript or from javascript for running this main attached to an element,
-  or even to pass a message into the event loop.  You can even expose the
-  constructors to the messages to javascript via the above [@@bs.deriving {accessors}]
-  attribute on the `msg` type or manually, that way even javascript can use it safely. *)
 let main =
-  beginnerProgram { (* The beginnerProgram just takes a set model state and the update and view functions *)
-    model = init (); (* Since model is a set value here, we call our init function to generate that value *)
+  beginnerProgram {
+    model = init ();
     update;
     view;
   }
