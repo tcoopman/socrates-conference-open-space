@@ -48,7 +48,6 @@ let init () =
         Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json"
         |> then_ Fetch.Response.json
         |> then_ (fun json -> 
-          Js.log json;
           !callbacks.enqueue (initializeSlots (decodeSlots json));
           resolve ()
         )
@@ -151,7 +150,6 @@ let update model = function
     let activeRoom = safeFind (fun room -> room.Room.name == roomName) model.rooms in
     ({model with activeRoom = activeRoom}, Tea.Cmd.none)
   | InitializeSlots slots ->
-    Js.log slots;
     ({model with data = slots}, Tea.Cmd.none)
 
 
