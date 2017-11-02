@@ -1,7 +1,28 @@
-open Tea.App
+type slot = {
+  name: string;
+  description: string;
+  start: string;
+  until: string;
+  roomName: string;
+}
+let decodeFromGoogleSheets json =
+  Json.Decode.{
+    name = json |> at ["gsx$name"; "$t"] string;
+    description = json |> at ["gsx$description"; "$t"] string;
+    start = json |> at ["gsx$start"; "$t"] string;
+    until = json |> at ["gsx$until"; "$t"] string;
+    roomName = json |> at ["gsx$roomname"; "$t"] string;
+  }
 
+let decodeSlots json =
+  let slots = Json.Decode.(
+    json |> at ["feed"; "entry"] (array decodeFromGoogleSheets);
+  )
+  in
+  slots |> Array.to_list
 type msg =
   | ActivateRoom of string
+  | InitializeSlots of slot list
   [@@bs.deriving {accessors}]
 
 module Room = struct
@@ -11,22 +32,30 @@ module Room = struct
     x: int;
     y: int;
   }
+
 end
 
-type slot = {
-  name: string;
-  description: string;
-  start: int;
-  until: int;
-  roomName: string;
-}
 type model = {
   data: slot list;
   rooms: Room.t list;
   activeRoom: Room.t option;
 }
 
-let init () = {
+let init () = 
+  let initCmds =
+    Tea.Cmd.call (fun callbacks -> 
+      Js.Promise.(
+        Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json"
+        |> then_ Fetch.Response.json
+        |> then_ (fun json -> 
+          Js.log json;
+          !callbacks.enqueue (initializeSlots (decodeSlots json));
+          resolve ()
+        )
+      ) |> ignore
+    )
+  in
+  ({
   activeRoom = None;
   rooms = [
     {
@@ -48,16 +77,8 @@ let init () = {
         y= 310;
     };
   ];
-  data = [
-    {
-      name= "Test";
-      description= "Test description";
-      start= 1;
-      until= 1;
-      roomName= "Lesse";
-    };
-  ]
-}
+  data = []
+}, Tea.Cmd.batch [initCmds])
 
 let safeFind f l = 
   try Some (List.find f l)
@@ -66,7 +87,10 @@ let safeFind f l =
 let update model = function 
   | ActivateRoom roomName -> 
     let activeRoom = safeFind (fun room -> room.Room.name == roomName) model.rooms in
-    {model with activeRoom = activeRoom}
+    ({model with activeRoom = activeRoom}, Tea.Cmd.none)
+  | InitializeSlots slots ->
+    Js.log slots;
+    ({model with data = slots}, Tea.Cmd.none)
 
 
 let viewRoomCircle room =
@@ -114,8 +138,9 @@ let view model =
     ]
 
 let main =
-  beginnerProgram {
-    model = init ();
+  Tea.App.standardProgram {
+    init;
     update;
     view;
+    subscriptions = fun _ -> Tea.Sub.none
   }
