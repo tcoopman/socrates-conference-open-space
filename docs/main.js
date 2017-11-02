@@ -1,4 +1,3 @@
-(function(l, i, v, e) { v = l.createElement(i); v.async = 1; v.src = '//' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; e = l.getElementsByTagName(i)[0]; e.parentNode.insertBefore(v, e)})(document, 'script');
 var starter = (function (exports) {
 'use strict';
 
@@ -3004,7 +3003,6 @@ function init() {
           fetch("https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json").then((function (prim) {
                     return prim.json();
                   })).then((function (json) {
-                  console.log(json);
                   _1(callbacks[0][/* enqueue */0], /* InitializeSlots */__(1, [decodeSlots(json)]));
                   return Promise.resolve(/* () */0);
                 }));
@@ -3134,11 +3132,9 @@ function safeFind(f, l) {
 
 function update(model, param) {
   if (param.tag) {
-    var slots = param[0];
-    console.log(slots);
     return /* tuple */[
             /* record */[
-              /* data */slots,
+              /* data */param[0],
               /* rooms */model[/* rooms */1],
               /* activeRoom */model[/* activeRoom */2]
             ],
