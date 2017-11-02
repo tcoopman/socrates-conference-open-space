@@ -183,7 +183,15 @@ let viewSlotInfoForRoom slots room =
     | _ -> List.map viewSlot slots
   in
   match room with
-  | None -> Html.div [] [Html.h1 [] [Html.text "Click on a room to see the booked slots"]];
+  | None -> 
+    Html.div [] [
+      Html.h1 [] [Html.text "Click on a room to see the booked slots"];
+      Html.p [] [
+        Html.span [] [Html.text "Click "];
+        Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
+        Html.span [] [Html.text " to update the slots"];
+      ] 
+    ];
   | Some room -> 
       let slots = List.filter (fun slot -> slot.roomName == room.Room.name) slots in
       Html.div [] [
