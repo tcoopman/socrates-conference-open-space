@@ -130,7 +130,7 @@ let view model =
     [Html.class' "grid"] [
       Html.div [] [
         Svg.svg [SvgA.width "650px"; SvgA.height "800px"] [
-          Svg.svgimage [SvgA.xlinkHref "/floorplan.jpg"; SvgA.width "100%"; SvgA.height "100%"] [];
+          Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100%"; SvgA.height "100%"] [];
           Svg.g [] (List.map viewRoomCircle model.rooms)
         ];
       ];
