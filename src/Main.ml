@@ -102,7 +102,7 @@ let init () =
         color= "#3eaec7";
         x= 6.;
         y= 88.;
-        width=24.;
+        width=33.;
         height=9.;
     };
     {
@@ -134,7 +134,7 @@ let init () =
         color= "#dcd07e";
         x= 63.;
         y= 92.;
-        width=16.;
+        width=18.;
         height=8.;
     };
   ];
