@@ -418,6 +418,350 @@ var imul = ( Math.imul || function (x,y) {
 
 'use strict';
 
+function lowercase(c) {
+  if (c >= /* "A" */65 && c <= /* "Z" */90 || c >= /* "\192" */192 && c <= /* "\214" */214 || c >= /* "\216" */216 && c <= /* "\222" */222) {
+    return c + 32 | 0;
+  } else {
+    return c;
+  }
+}
+
+function parse_format(fmt) {
+  var len = fmt.length;
+  if (len > 31) {
+    throw [
+          invalid_argument,
+          "format_int: format too long"
+        ];
+  }
+  var f = /* record */[
+    /* justify */"+",
+    /* signstyle */"-",
+    /* filter */" ",
+    /* alternate : false */0,
+    /* base : Dec */2,
+    /* signedconv : false */0,
+    /* width */0,
+    /* uppercase : false */0,
+    /* sign */1,
+    /* prec */-1,
+    /* conv */"f"
+  ];
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    if (i >= len) {
+      return f;
+    } else {
+      var c = fmt.charCodeAt(i);
+      var exit = 0;
+      if (c >= 69) {
+        if (c >= 88) {
+          if (c >= 121) {
+            exit = 1;
+          } else {
+            switch (c - 88 | 0) {
+              case 0 : 
+                  f[/* base */4] = /* Hex */1;
+                  f[/* uppercase */7] = /* true */1;
+                  _i = i + 1 | 0;
+                  continue ;
+                  case 13 : 
+              case 14 : 
+              case 15 : 
+                  exit = 5;
+                  break;
+              case 12 : 
+              case 17 : 
+                  exit = 4;
+                  break;
+              case 23 : 
+                  f[/* base */4] = /* Oct */0;
+                  _i = i + 1 | 0;
+                  continue ;
+                  case 29 : 
+                  f[/* base */4] = /* Dec */2;
+                  _i = i + 1 | 0;
+                  continue ;
+                  case 1 : 
+              case 2 : 
+              case 3 : 
+              case 4 : 
+              case 5 : 
+              case 6 : 
+              case 7 : 
+              case 8 : 
+              case 9 : 
+              case 10 : 
+              case 11 : 
+              case 16 : 
+              case 18 : 
+              case 19 : 
+              case 20 : 
+              case 21 : 
+              case 22 : 
+              case 24 : 
+              case 25 : 
+              case 26 : 
+              case 27 : 
+              case 28 : 
+              case 30 : 
+              case 31 : 
+                  exit = 1;
+                  break;
+              case 32 : 
+                  f[/* base */4] = /* Hex */1;
+                  _i = i + 1 | 0;
+                  continue ;
+                  
+            }
+          }
+        } else if (c >= 72) {
+          exit = 1;
+        } else {
+          f[/* signedconv */5] = /* true */1;
+          f[/* uppercase */7] = /* true */1;
+          f[/* conv */10] = String.fromCharCode(lowercase(c));
+          _i = i + 1 | 0;
+          continue ;
+          
+        }
+      } else {
+        var switcher = c - 32 | 0;
+        if (switcher > 25 || switcher < 0) {
+          exit = 1;
+        } else {
+          switch (switcher) {
+            case 3 : 
+                f[/* alternate */3] = /* true */1;
+                _i = i + 1 | 0;
+                continue ;
+                case 0 : 
+            case 11 : 
+                exit = 2;
+                break;
+            case 13 : 
+                f[/* justify */0] = "-";
+                _i = i + 1 | 0;
+                continue ;
+                case 14 : 
+                f[/* prec */9] = 0;
+                var j = i + 1 | 0;
+                while((function(j){
+                    return function () {
+                      var w = fmt.charCodeAt(j) - /* "0" */48 | 0;
+                      return +(w >= 0 && w <= 9);
+                    }
+                    }(j))()) {
+                  f[/* prec */9] = (imul(f[/* prec */9], 10) + fmt.charCodeAt(j) | 0) - /* "0" */48 | 0;
+                  j = j + 1 | 0;
+                };
+                _i = j;
+                continue ;
+                case 1 : 
+            case 2 : 
+            case 4 : 
+            case 5 : 
+            case 6 : 
+            case 7 : 
+            case 8 : 
+            case 9 : 
+            case 10 : 
+            case 12 : 
+            case 15 : 
+                exit = 1;
+                break;
+            case 16 : 
+                f[/* filter */2] = "0";
+                _i = i + 1 | 0;
+                continue ;
+                case 17 : 
+            case 18 : 
+            case 19 : 
+            case 20 : 
+            case 21 : 
+            case 22 : 
+            case 23 : 
+            case 24 : 
+            case 25 : 
+                exit = 3;
+                break;
+            
+          }
+        }
+      }
+      switch (exit) {
+        case 1 : 
+            _i = i + 1 | 0;
+            continue ;
+            case 2 : 
+            f[/* signstyle */1] = String.fromCharCode(c);
+            _i = i + 1 | 0;
+            continue ;
+            case 3 : 
+            f[/* width */6] = 0;
+            var j$1 = i;
+            while((function(j$1){
+                return function () {
+                  var w = fmt.charCodeAt(j$1) - /* "0" */48 | 0;
+                  return +(w >= 0 && w <= 9);
+                }
+                }(j$1))()) {
+              f[/* width */6] = (imul(f[/* width */6], 10) + fmt.charCodeAt(j$1) | 0) - /* "0" */48 | 0;
+              j$1 = j$1 + 1 | 0;
+            };
+            _i = j$1;
+            continue ;
+            case 4 : 
+            f[/* signedconv */5] = /* true */1;
+            f[/* base */4] = /* Dec */2;
+            _i = i + 1 | 0;
+            continue ;
+            case 5 : 
+            f[/* signedconv */5] = /* true */1;
+            f[/* conv */10] = String.fromCharCode(c);
+            _i = i + 1 | 0;
+            continue ;
+            
+      }
+    }
+  }
+}
+
+function finish_formatting(param, rawbuffer) {
+  var justify = param[/* justify */0];
+  var signstyle = param[/* signstyle */1];
+  var filter = param[/* filter */2];
+  var alternate = param[/* alternate */3];
+  var base = param[/* base */4];
+  var signedconv = param[/* signedconv */5];
+  var width = param[/* width */6];
+  var uppercase = param[/* uppercase */7];
+  var sign = param[/* sign */8];
+  var len = rawbuffer.length;
+  if (signedconv && (sign < 0 || signstyle !== "-")) {
+    len = len + 1 | 0;
+  }
+  if (alternate) {
+    if (base) {
+      if (base === /* Hex */1) {
+        len = len + 2 | 0;
+      }
+      
+    } else {
+      len = len + 1 | 0;
+    }
+  }
+  var buffer = "";
+  if (justify === "+" && filter === " ") {
+    for(var i = len ,i_finish = width - 1 | 0; i <= i_finish; ++i){
+      buffer = buffer + filter;
+    }
+  }
+  if (signedconv) {
+    if (sign < 0) {
+      buffer = buffer + "-";
+    } else if (signstyle !== "-") {
+      buffer = buffer + signstyle;
+    }
+    
+  }
+  if (alternate && base === /* Oct */0) {
+    buffer = buffer + "0";
+  }
+  if (alternate && base === /* Hex */1) {
+    buffer = buffer + "0x";
+  }
+  if (justify === "+" && filter === "0") {
+    for(var i$1 = len ,i_finish$1 = width - 1 | 0; i$1 <= i_finish$1; ++i$1){
+      buffer = buffer + filter;
+    }
+  }
+  buffer = uppercase ? buffer + rawbuffer.toUpperCase() : buffer + rawbuffer;
+  if (justify === "-") {
+    for(var i$2 = len ,i_finish$2 = width - 1 | 0; i$2 <= i_finish$2; ++i$2){
+      buffer = buffer + " ";
+    }
+  }
+  return buffer;
+}
+
+function caml_format_float(fmt, x) {
+  var f = parse_format(fmt);
+  var prec = f[/* prec */9] < 0 ? 6 : f[/* prec */9];
+  var x$1 = x < 0 ? (f[/* sign */8] = -1, -x) : x;
+  var s = "";
+  if (isNaN(x$1)) {
+    s = "nan";
+    f[/* filter */2] = " ";
+  } else if (isFinite(x$1)) {
+    var match = f[/* conv */10];
+    switch (match) {
+      case "e" : 
+          s = x$1.toExponential(prec);
+          var i = s.length;
+          if (s[i - 3 | 0] === "e") {
+            s = s.slice(0, i - 1 | 0) + ("0" + s.slice(i - 1 | 0));
+          }
+          break;
+      case "f" : 
+          s = x$1.toFixed(prec);
+          break;
+      case "g" : 
+          var prec$1 = prec !== 0 ? prec : 1;
+          s = x$1.toExponential(prec$1 - 1 | 0);
+          var j = s.indexOf("e");
+          var exp = Number(s.slice(j + 1 | 0)) | 0;
+          if (exp < -4 || x$1 >= 1e21 || x$1.toFixed().length > prec$1) {
+            var i$1 = j - 1 | 0;
+            while(s[i$1] === "0") {
+              i$1 = i$1 - 1 | 0;
+            }
+            if (s[i$1] === ".") {
+              i$1 = i$1 - 1 | 0;
+            }
+            s = s.slice(0, i$1 + 1 | 0) + s.slice(j);
+            var i$2 = s.length;
+            if (s[i$2 - 3 | 0] === "e") {
+              s = s.slice(0, i$2 - 1 | 0) + ("0" + s.slice(i$2 - 1 | 0));
+            }
+            
+          } else {
+            var p = prec$1;
+            if (exp < 0) {
+              p = p - (exp + 1 | 0) | 0;
+              s = x$1.toFixed(p);
+            } else {
+              while((function () {
+                      s = x$1.toFixed(p);
+                      return +(s.length > (prec$1 + 1 | 0));
+                    })()) {
+                p = p - 1 | 0;
+              }
+            }
+            if (p !== 0) {
+              var k = s.length - 1 | 0;
+              while(s[k] === "0") {
+                k = k - 1 | 0;
+              }
+              if (s[k] === ".") {
+                k = k - 1 | 0;
+              }
+              s = s.slice(0, k + 1 | 0);
+            }
+            
+          }
+          break;
+      default:
+        
+    }
+  } else {
+    s = "inf";
+    f[/* filter */2] = " ";
+  }
+  return finish_formatting(f, s);
+}
+
 
 /* float_of_string Not a pure module */
 
@@ -526,6 +870,17 @@ function bytes_to_string(a) {
   }
 }
 
+function get(s, i) {
+  if (i < 0 || i >= s.length) {
+    throw [
+          invalid_argument,
+          "index out of bounds"
+        ];
+  } else {
+    return s.charCodeAt(i);
+  }
+}
+
 
 /* No side effect */
 
@@ -567,8 +922,40 @@ function create(str) {
 
 var Exit = create("Pervasives.Exit");
 
-function string_of_int(param) {
-  return "" + param;
+function $caret(a, b) {
+  return a + b;
+}
+
+function valid_float_lexem(s) {
+  var l = s.length;
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    if (i >= l) {
+      return $caret(s, ".");
+    } else {
+      var match = get(s, i);
+      if (match >= 48) {
+        if (match >= 58) {
+          return s;
+        } else {
+          _i = i + 1 | 0;
+          continue ;
+          
+        }
+      } else if (match !== 45) {
+        return s;
+      } else {
+        _i = i + 1 | 0;
+        continue ;
+        
+      }
+    }
+  }
+}
+
+function string_of_float(f) {
+  return valid_float_lexem(caml_format_float("%.12g", f));
 }
 
 
@@ -2285,6 +2672,10 @@ function standardProgram(param, pnode, args) {
 
 var svgNamespace = "http://www.w3.org/2000/svg";
 
+function text$1(str) {
+  return /* Text */__(1, [str]);
+}
+
 function svg($staropt$star, $staropt$star$1, props, nodes) {
   var key = $staropt$star ? $staropt$star[0] : "";
   var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
@@ -2297,16 +2688,22 @@ function g($staropt$star, $staropt$star$1, props, nodes) {
   return fullnode(svgNamespace, "g", key, unique, props, nodes);
 }
 
-function circle($staropt$star, $staropt$star$1, props, nodes) {
-  var key = $staropt$star ? $staropt$star[0] : "";
-  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
-  return fullnode(svgNamespace, "circle", key, unique, props, nodes);
-}
-
 function svgimage($staropt$star, $staropt$star$1, props, nodes) {
   var key = $staropt$star ? $staropt$star[0] : "";
   var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
   return fullnode(svgNamespace, "image", key, unique, props, nodes);
+}
+
+function rect($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode(svgNamespace, "rect", key, unique, props, nodes);
+}
+
+function text$prime($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode(svgNamespace, "text", key, unique, props, nodes);
 }
 
 
@@ -2325,10 +2722,42 @@ function div$2($staropt$star, $staropt$star$1, props, nodes) {
   return fullnode("", "div", key, unique, props, nodes);
 }
 
+function span($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "span", key, unique, props, nodes);
+}
+
+function p($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "p", key, unique, props, nodes);
+}
+
+function a$1($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "a", key, unique, props, nodes);
+}
+
 function h1($staropt$star, $staropt$star$1, props, nodes) {
   var key = $staropt$star ? $staropt$star[0] : "";
   var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
   return fullnode("", "h1", key, unique, props, nodes);
+}
+
+function h2($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "h2", key, unique, props, nodes);
+}
+
+function href(str) {
+  return /* Attribute */__(1, [
+            "",
+            "href",
+            str
+          ]);
 }
 
 function class$prime(name) {
@@ -2429,34 +2858,10 @@ function at(key_path, decoder) {
 // Generated by BUCKLESCRIPT VERSION 2.0.0, PLEASE EDIT WITH CARE
 'use strict';
 
-function cx(v) {
-  return /* Attribute */__(1, [
-            "",
-            "cx",
-            v
-          ]);
-}
-
-function cy(v) {
-  return /* Attribute */__(1, [
-            "",
-            "cy",
-            v
-          ]);
-}
-
 function height(v) {
   return /* Attribute */__(1, [
             "",
             "height",
-            v
-          ]);
-}
-
-function r(v) {
-  return /* Attribute */__(1, [
-            "",
-            "r",
             v
           ]);
 }
@@ -2469,6 +2874,14 @@ function width(v) {
           ]);
 }
 
+function x(v) {
+  return /* Attribute */__(1, [
+            "",
+            "x",
+            v
+          ]);
+}
+
 function xlinkHref(v) {
   return /* Attribute */__(1, [
             "http://www.w3.org/1999/xlink",
@@ -2477,10 +2890,34 @@ function xlinkHref(v) {
           ]);
 }
 
+function y(v) {
+  return /* Attribute */__(1, [
+            "",
+            "y",
+            v
+          ]);
+}
+
+function alignmentBaseline(v) {
+  return /* Attribute */__(1, [
+            "",
+            "alignment-baseline",
+            v
+          ]);
+}
+
 function fill$4(v) {
   return /* Attribute */__(1, [
             "",
             "fill",
+            v
+          ]);
+}
+
+function fontSize(v) {
+  return /* Attribute */__(1, [
+            "",
+            "font-size",
             v
           ]);
 }
@@ -2523,20 +2960,13 @@ function decodeFromGoogleSheets(json) {
                       /* [] */0
                     ]
                   ], string), json),
-          /* start */_1(at(/* :: */[
-                    "gsx$start",
-                    /* :: */[
-                      "$t",
-                      /* [] */0
-                    ]
-                  ], string), json),
-          /* until */_1(at(/* :: */[
-                    "gsx$until",
-                    /* :: */[
-                      "$t",
-                      /* [] */0
-                    ]
-                  ], string), json),
+          /* start */new Date(_1(at(/* :: */[
+                        "gsx$start",
+                        /* :: */[
+                          "$t",
+                          /* [] */0
+                        ]
+                      ], string), json)),
           /* roomName */_1(at(/* :: */[
                     "gsx$roomname",
                     /* :: */[
@@ -2586,25 +3016,101 @@ function init() {
             /* rooms : :: */[
               /* record */[
                 /* name */"Lesse",
-                /* color */"pink",
-                /* x */310,
-                /* y */220
+                /* color */"#ccbdcf",
+                /* x */30,
+                /* y */2,
+                /* width */16,
+                /* height */9
               ],
               /* :: */[
                 /* record */[
                   /* name */"LHomme",
-                  /* color */"red",
-                  /* x */340,
-                  /* y */250
+                  /* color */"#e2d3d4",
+                  /* x */54.5,
+                  /* y */6,
+                  /* width */18.5,
+                  /* height */9
                 ],
                 /* :: */[
                   /* record */[
                     /* name */"Semois",
-                    /* color */"blue",
-                    /* x */490,
-                    /* y */310
+                    /* color */"#bfb15d",
+                    /* x */61,
+                    /* y */13,
+                    /* width */16,
+                    /* height */9
                   ],
-                  /* [] */0
+                  /* :: */[
+                    /* record */[
+                      /* name */"Sambre",
+                      /* color */"#5555ff",
+                      /* x */7,
+                      /* y */45,
+                      /* width */16,
+                      /* height */9
+                    ],
+                    /* :: */[
+                      /* record */[
+                        /* name */"Meuse",
+                        /* color */"#d7b569",
+                        /* x */33,
+                        /* y */41,
+                        /* width */16,
+                        /* height */9
+                      ],
+                      /* :: */[
+                        /* record */[
+                          /* name */"Sambre et Meuse",
+                          /* color */"#3eaec7",
+                          /* x */6,
+                          /* y */88,
+                          /* width */24,
+                          /* height */9
+                        ],
+                        /* :: */[
+                          /* record */[
+                            /* name */"Wamme",
+                            /* color */"#d87d10",
+                            /* x */50,
+                            /* y */50,
+                            /* width */16,
+                            /* height */9
+                          ],
+                          /* :: */[
+                            /* record */[
+                              /* name */"Vesdre",
+                              /* color */"#d99367",
+                              /* x */40,
+                              /* y */90,
+                              /* width */16,
+                              /* height */9
+                            ],
+                            /* :: */[
+                              /* record */[
+                                /* name */"Ourthe",
+                                /* color */"#c1cac0",
+                                /* x */65,
+                                /* y */56,
+                                /* width */16,
+                                /* height */9
+                              ],
+                              /* :: */[
+                                /* record */[
+                                  /* name */"Ambleve",
+                                  /* color */"#dcd07e",
+                                  /* x */63,
+                                  /* y */92,
+                                  /* width */16,
+                                  /* height */8
+                                ],
+                                /* [] */0
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
                 ]
               ]
             ],
@@ -2655,39 +3161,82 @@ function update(model, param) {
 }
 
 function viewRoomCircle(room) {
-  return circle(/* None */0, /* None */0, /* :: */[
-              cx(string_of_int(room[/* x */2])),
-              /* :: */[
-                cy(string_of_int(room[/* y */3])),
-                /* :: */[
-                  r("10"),
-                  /* :: */[
-                    stroke("black"),
+  var $less$ = function (a$$1, b) {
+    var str = string_of_float(b);
+    return _1(a$$1, "" + (String(str) + "%"));
+  };
+  return g(/* None */0, /* None */0, /* :: */[
+              onClick(/* ActivateRoom */__(0, [room[/* name */0]])),
+              /* [] */0
+            ], /* :: */[
+              rect(/* None */0, /* None */0, /* :: */[
+                    $less$(x, room[/* x */2]),
                     /* :: */[
-                      strokeWidth("1"),
+                      $less$(y, room[/* y */3]),
                       /* :: */[
-                        fill$4(room[/* color */1]),
+                        $less$(width, room[/* width */4]),
                         /* :: */[
-                          onClick(/* ActivateRoom */__(0, [room[/* name */0]])),
-                          /* [] */0
+                          $less$(height, room[/* height */5]),
+                          /* :: */[
+                            stroke("black"),
+                            /* :: */[
+                              strokeWidth("1"),
+                              /* :: */[
+                                fill$4(room[/* color */1]),
+                                /* [] */0
+                              ]
+                            ]
+                          ]
                         ]
                       ]
                     ]
-                  ]
-                ]
+                  ], /* [] */0),
+              /* :: */[
+                text$prime(/* None */0, /* None */0, /* :: */[
+                      $less$(x, room[/* x */2] + 1),
+                      /* :: */[
+                        $less$(y, room[/* y */3] + 3),
+                        /* :: */[
+                          alignmentBaseline("central"),
+                          /* :: */[
+                            fontSize("14"),
+                            /* [] */0
+                          ]
+                        ]
+                      ]
+                    ], /* :: */[
+                      text$1(room[/* name */0]),
+                      /* [] */0
+                    ]),
+                /* [] */0
               ]
-            ], /* [] */0);
+            ]);
 }
 
 function viewSlotInfoForRoom(slots, room) {
   var viewSlot = function (slot) {
-    return div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                      text$2(slot[/* name */0]),
+    return div$2(/* None */0, /* None */0, /* :: */[
+                class$prime("slot"),
+                /* [] */0
+              ], /* :: */[
+                div$2(/* None */0, /* None */0, /* :: */[
+                      class$prime("slot-header"),
                       /* [] */0
+                    ], /* :: */[
+                      h2(/* None */0, /* None */0, /* [] */0, /* :: */[
+                            text$2(slot[/* name */0]),
+                            /* [] */0
+                          ]),
+                      /* :: */[
+                        span(/* None */0, /* None */0, /* [] */0, /* :: */[
+                              text$2(slot[/* start */2].toLocaleString()),
+                              /* [] */0
+                            ]),
+                        /* [] */0
+                      ]
                     ]),
                 /* :: */[
-                  div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+                  span(/* None */0, /* None */0, /* [] */0, /* :: */[
                         text$2(slot[/* description */1]),
                         /* [] */0
                       ]),
@@ -2711,7 +3260,7 @@ function viewSlotInfoForRoom(slots, room) {
   if (room) {
     var room$1 = room[0];
     var slots$1 = filter((function (slot) {
-              return +(slot[/* roomName */4] === room$1[/* name */0]);
+              return +(slot[/* roomName */3] === room$1[/* name */0]);
             }))(slots);
     return div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
                 h1(/* None */0, /* None */0, /* [] */0, /* :: */[
@@ -2725,49 +3274,82 @@ function viewSlotInfoForRoom(slots, room) {
               ]);
   } else {
     return div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                text$2("Click on a room to see the booked slots"),
-                /* [] */0
+                h1(/* None */0, /* None */0, /* [] */0, /* :: */[
+                      text$2("Click on a room to see the booked slots"),
+                      /* [] */0
+                    ]),
+                /* :: */[
+                  p(/* None */0, /* None */0, /* [] */0, /* :: */[
+                        span(/* None */0, /* None */0, /* [] */0, /* :: */[
+                              text$2("Click "),
+                              /* [] */0
+                            ]),
+                        /* :: */[
+                          a$1(/* None */0, /* None */0, /* :: */[
+                                href("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
+                                /* [] */0
+                              ], /* :: */[
+                                text$2("here"),
+                                /* [] */0
+                              ]),
+                          /* :: */[
+                            span(/* None */0, /* None */0, /* [] */0, /* :: */[
+                                  text$2(" to update the slots"),
+                                  /* [] */0
+                                ]),
+                            /* [] */0
+                          ]
+                        ]
+                      ]),
+                  /* [] */0
+                ]
               ]);
   }
 }
 
 function view(model) {
   return div$2(/* None */0, /* None */0, /* :: */[
-              class$prime("grid"),
+              class$prime(""),
               /* [] */0
             ], /* :: */[
               div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                    svg(/* None */0, /* None */0, /* :: */[
-                          width("650px"),
-                          /* :: */[
-                            height("800px"),
-                            /* [] */0
-                          ]
-                        ], /* :: */[
-                          svgimage(/* None */0, /* None */0, /* :: */[
-                                xlinkHref("/floorplan.jpg"),
+                    div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+                          svg(/* None */0, /* None */0, /* :: */[
+                                width("100vw"),
                                 /* :: */[
-                                  width("100%"),
-                                  /* :: */[
-                                    height("100%"),
-                                    /* [] */0
-                                  ]
+                                  height("69vh"),
+                                  /* [] */0
                                 ]
-                              ], /* [] */0),
-                          /* :: */[
-                            g(/* None */0, /* None */0, /* [] */0, map(viewRoomCircle, model[/* rooms */1])),
-                            /* [] */0
-                          ]
+                              ], /* :: */[
+                                svgimage(/* None */0, /* None */0, /* :: */[
+                                      xlinkHref("./floorplan.jpg"),
+                                      /* :: */[
+                                        width("100vw"),
+                                        /* :: */[
+                                          height("69vh"),
+                                          /* [] */0
+                                        ]
+                                      ]
+                                    ], /* [] */0),
+                                /* :: */[
+                                  g(/* None */0, /* None */0, /* [] */0, map(viewRoomCircle, model[/* rooms */1])),
+                                  /* [] */0
+                                ]
+                              ]),
+                          /* [] */0
                         ]),
-                    /* [] */0
-                  ]),
-              /* :: */[
-                div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                      viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
+                    /* :: */[
+                      div$2(/* None */0, /* None */0, /* :: */[
+                            class$prime("info"),
+                            /* [] */0
+                          ], /* :: */[
+                            viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
+                            /* [] */0
+                          ]),
                       /* [] */0
-                    ]),
-                /* [] */0
-              ]
+                    ]
+                  ]),
+              /* [] */0
             ]);
 }
 
