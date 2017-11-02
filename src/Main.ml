@@ -1,16 +1,14 @@
 type slot = {
   name: string;
   description: string;
-  start: string;
-  until: string;
+  start: Js.Date.t;
   roomName: string;
 }
 let decodeFromGoogleSheets json =
   Json.Decode.{
     name = json |> at ["gsx$name"; "$t"] string;
     description = json |> at ["gsx$description"; "$t"] string;
-    start = json |> at ["gsx$start"; "$t"] string;
-    until = json |> at ["gsx$until"; "$t"] string;
+    start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
     roomName = json |> at ["gsx$roomname"; "$t"] string;
   }
 
@@ -29,8 +27,10 @@ module Room = struct
   type t = {
     name: string;
     color: string;
-    x: int;
-    y: int;
+    x: float;
+    y: float;
+    width: float;
+    height: float;
   }
 
 end
@@ -60,21 +60,83 @@ let init () =
   rooms = [
     {
         name= "Lesse";
-        color= "pink";
-        x= 310;
-        y= 220;
+        color= "#ccbdcf";
+        x= 30.;
+        y= 2.;
+        width=16.;
+        height=9.;
     };
     {
         name= "LHomme";
-        color= "red";
-        x= 340;
-        y= 250;
+        color= "#e2d3d4";
+        x= 54.5;
+        y= 6.;
+        width=18.5;
+        height=9.;
     };
     {
         name= "Semois";
-        color= "blue";
-        x= 490;
-        y= 310;
+        color= "#bfb15d";
+        x= 61.;
+        y= 13.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Sambre";
+        color= "#5555ff";
+        x= 7.;
+        y= 45.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Meuse";
+        color= "#d7b569";
+        x= 33.;
+        y= 41.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Sambre et Meuse";
+        color= "#3eaec7";
+        x= 6.;
+        y= 88.;
+        width=24.;
+        height=9.;
+    };
+    {
+        name= "Wamme";
+        color= "#d87d10";
+        x= 50.;
+        y= 50.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Vesdre";
+        color= "#d99367";
+        x= 40.;
+        y= 90.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Ourthe";
+        color= "#c1cac0";
+        x= 65.;
+        y= 56.;
+        width=16.;
+        height=9.;
+    };
+    {
+        name= "Ambleve";
+        color= "#dcd07e";
+        x= 63.;
+        y= 92.;
+        width=16.;
+        height=8.;
     };
   ];
   data = []
@@ -97,15 +159,22 @@ let viewRoomCircle room =
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
   let module SvgE = Tea.Svg.Events in
-  let (<$) a b = a (string_of_int b) in
-  Svg.circle [SvgA.cx <$ room.Room.x; SvgA.cy <$ room.y; SvgA.r "10"; SvgA.stroke "black"; SvgA.strokeWidth "1"; SvgA.fill room.color; Tea.Html.onClick (activateRoom room.name)] []
+  let (<$) a b = 
+    let str = string_of_float b in
+    a {j|$(str)%|j}
+  in
+  Svg.g [Tea.Html.onClick (activateRoom room.Room.name)] [
+    Svg.rect [SvgA.x <$ room.Room.x; SvgA.y <$ room.y; SvgA.width <$ room.width; SvgA.height <$ room.height; SvgA.stroke "black"; SvgA.strokeWidth "1"; SvgA.fill room.color; ] [];
+    Svg.text' [SvgA.x <$ (room.Room.x +. 1.); SvgA.y <$ (room.y +. 3.); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
+
+  ]
 
 let viewSlotInfoForRoom slots room =
   let module Html = Tea.Html in
   let viewSlot slot =
-    Html.div [] [
-      Html.div [] [Html.text slot.name];
-      Html.div [] [Html.text slot.description];
+    Html.div [Html.class' "slot"] [
+      Html.div [Html.class' "slot-header"] [Html.h2 [] [Html.text slot.name]; Html.span [] [Html.text (Js.Date.toLocaleString slot.start)]];
+      Html.span [] [Html.text slot.description];
     ]
   in
   let viewSlots slots =
@@ -114,7 +183,7 @@ let viewSlotInfoForRoom slots room =
     | _ -> List.map viewSlot slots
   in
   match room with
-  | None -> Html.div [] [Html.text "Click on a room to see the booked slots"];
+  | None -> Html.div [] [Html.h1 [] [Html.text "Click on a room to see the booked slots"]];
   | Some room -> 
       let slots = List.filter (fun slot -> slot.roomName == room.Room.name) slots in
       Html.div [] [
@@ -127,14 +196,16 @@ let view model =
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
   Html.div
-    [Html.class' "grid"] [
+    [Html.class' ""] [
       Html.div [] [
-        Svg.svg [SvgA.width "650px"; SvgA.height "800px"] [
-          Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100%"; SvgA.height "100%"] [];
-          Svg.g [] (List.map viewRoomCircle model.rooms)
+        Html.div [] [
+          Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
+            Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100vw"; SvgA.height "69vh"] [];
+            Svg.g [] (List.map viewRoomCircle model.rooms)
+          ];
         ];
+        Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
       ];
-      Html.div [] [viewSlotInfoForRoom model.data model.activeRoom]
     ]
 
 let main =
