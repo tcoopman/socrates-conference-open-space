@@ -18,9 +18,14 @@ let decodeSlots json =
   )
   in
   slots |> Array.to_list
+
+type page = Map | Upcoming
+
 type msg =
   | ActivateRoom of string
   | InitializeSlots of slot list
+  | ToggleMenu
+  | SetPage of page
   [@@bs.deriving {accessors}]
 
 module Room = struct
@@ -35,10 +40,13 @@ module Room = struct
 
 end
 
+
 type model = {
   data: slot list;
   rooms: Room.t list;
   activeRoom: Room.t option;
+  page: page;
+  menuVisible: bool;
 }
 
 let init () = 
@@ -56,6 +64,8 @@ let init () =
   in
   ({
   activeRoom = None;
+  page = Map;
+  menuVisible = true;
   rooms = [
     {
         name= "Lesse";
@@ -151,6 +161,10 @@ let update model = function
     ({model with activeRoom = activeRoom}, Tea.Cmd.none)
   | InitializeSlots slots ->
     ({model with data = slots}, Tea.Cmd.none)
+  | ToggleMenu ->
+    ({model with menuVisible = not model.menuVisible}, Tea.Cmd.none)
+  | SetPage page ->
+    ({model with page = page; menuVisible = false}, Tea.Cmd.none)
 
 
 let viewRoomCircle room =
@@ -201,8 +215,17 @@ let view model =
   let module Html = Tea.Html in
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
-  Html.div
-    [Html.class' ""] [
+  let viewHamburger =
+    let class' = if model.menuVisible then "open" else "" in
+    Html.div [Html.id "hamburger"; Html.class' class'; Html.onClick toggleMenu] [
+      Html.span [] [];
+      Html.span [] [];
+      Html.span [] [];
+    ]
+  in
+  let viewPage =
+    match model.page with
+    | Map ->
       Html.div [] [
         Html.div [] [
           Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
@@ -211,7 +234,29 @@ let view model =
           ];
         ];
         Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
+      ]
+    | Upcoming -> 
+      Html.div [] [Html.text "Todo"]
+  in
+  let viewContent =
+    match model.menuVisible with
+    | false -> 
+      viewPage
+    | true -> 
+      Html.div [] [
+        Html.ul [] [
+          Html.li [] [ Html.a [Html.onClick (setPage Map) ] [ Html.text "OpenSpace Map" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming" ]];
+        ]
+      ]
+  in
+  Html.div
+    [Html.class' ""] [
+      Html.div [Html.class' "hero"] [
+        Html.h1 [] [Html.text "Socrates Be OpenSpace"];
+        viewHamburger
       ];
+      viewContent;
     ]
 
 let main =
