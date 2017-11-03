@@ -2751,6 +2751,25 @@ function h2($staropt$star, $staropt$star$1, props, nodes) {
   return fullnode("", "h2", key, unique, props, nodes);
 }
 
+function ul($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "ul", key, unique, props, nodes);
+}
+
+function li($staropt$star, $staropt$star$1, props, nodes) {
+  var key = $staropt$star ? $staropt$star[0] : "";
+  var unique = $staropt$star$1 ? $staropt$star$1[0] : "";
+  return fullnode("", "li", key, unique, props, nodes);
+}
+
+function id$1(str) {
+  return /* RawProp */__(0, [
+            "id",
+            str
+          ]);
+}
+
 function href(str) {
   return /* Attribute */__(1, [
             "",
@@ -2996,6 +3015,10 @@ function initializeSlots(param_0) {
   return /* InitializeSlots */__(1, [param_0]);
 }
 
+function setPage(param_0) {
+  return /* SetPage */__(2, [param_0]);
+}
+
 var Room = /* module */[];
 
 function init() {
@@ -3062,7 +3085,7 @@ function init() {
                           /* color */"#3eaec7",
                           /* x */6,
                           /* y */88,
-                          /* width */24,
+                          /* width */33,
                           /* height */9
                         ],
                         /* :: */[
@@ -3098,7 +3121,7 @@ function init() {
                                   /* color */"#dcd07e",
                                   /* x */63,
                                   /* y */92,
-                                  /* width */16,
+                                  /* width */18,
                                   /* height */8
                                 ],
                                 /* [] */0
@@ -3112,7 +3135,9 @@ function init() {
                 ]
               ]
             ],
-            /* activeRoom : None */0
+            /* activeRoom : None */0,
+            /* page : Map */0,
+            /* menuVisible : true */1
           ],
           batch(/* :: */[
                 initCmds,
@@ -3131,28 +3156,58 @@ function safeFind(f, l) {
 }
 
 function update(model, param) {
-  if (param.tag) {
-    return /* tuple */[
-            /* record */[
-              /* data */param[0],
-              /* rooms */model[/* rooms */1],
-              /* activeRoom */model[/* activeRoom */2]
-            ],
-            none
-          ];
-  } else {
-    var roomName = param[0];
-    var activeRoom = safeFind((function (room) {
-            return +(room[/* name */0] === roomName);
-          }), model[/* rooms */1]);
+  if (typeof param === "number") {
     return /* tuple */[
             /* record */[
               /* data */model[/* data */0],
               /* rooms */model[/* rooms */1],
-              /* activeRoom */activeRoom
+              /* activeRoom */model[/* activeRoom */2],
+              /* page */model[/* page */3],
+              /* menuVisible */1 - model[/* menuVisible */4]
             ],
             none
           ];
+  } else {
+    switch (param.tag | 0) {
+      case 0 : 
+          var roomName = param[0];
+          var activeRoom = safeFind((function (room) {
+                  return +(room[/* name */0] === roomName);
+                }), model[/* rooms */1]);
+          return /* tuple */[
+                  /* record */[
+                    /* data */model[/* data */0],
+                    /* rooms */model[/* rooms */1],
+                    /* activeRoom */activeRoom,
+                    /* page */model[/* page */3],
+                    /* menuVisible */model[/* menuVisible */4]
+                  ],
+                  none
+                ];
+      case 1 : 
+          return /* tuple */[
+                  /* record */[
+                    /* data */param[0],
+                    /* rooms */model[/* rooms */1],
+                    /* activeRoom */model[/* activeRoom */2],
+                    /* page */model[/* page */3],
+                    /* menuVisible */model[/* menuVisible */4]
+                  ],
+                  none
+                ];
+      case 2 : 
+          return /* tuple */[
+                  /* record */[
+                    /* data */model[/* data */0],
+                    /* rooms */model[/* rooms */1],
+                    /* activeRoom */model[/* activeRoom */2],
+                    /* page */param[0],
+                    /* menuVisible : false */0
+                  ],
+                  none
+                ];
+      
+    }
   }
 }
 
@@ -3304,48 +3359,117 @@ function viewSlotInfoForRoom(slots, room) {
 }
 
 function view(model) {
+  var class$prime$$1 = model[/* menuVisible */4] ? "open" : "";
+  var viewHamburger = div$2(/* None */0, /* None */0, /* :: */[
+        id$1("hamburger"),
+        /* :: */[
+          class$prime(class$prime$$1),
+          /* :: */[
+            onClick(/* ToggleMenu */0),
+            /* [] */0
+          ]
+        ]
+      ], /* :: */[
+        span(/* None */0, /* None */0, /* [] */0, /* [] */0),
+        /* :: */[
+          span(/* None */0, /* None */0, /* [] */0, /* [] */0),
+          /* :: */[
+            span(/* None */0, /* None */0, /* [] */0, /* [] */0),
+            /* [] */0
+          ]
+        ]
+      ]);
+  var match = model[/* page */3];
+  var viewPage = match !== 0 ? div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+          text$2("Todo"),
+          /* [] */0
+        ]) : div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+          div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+                svg(/* None */0, /* None */0, /* :: */[
+                      width("100vw"),
+                      /* :: */[
+                        height("69vh"),
+                        /* [] */0
+                      ]
+                    ], /* :: */[
+                      svgimage(/* None */0, /* None */0, /* :: */[
+                            xlinkHref("./floorplan.jpg"),
+                            /* :: */[
+                              width("100vw"),
+                              /* :: */[
+                                height("69vh"),
+                                /* [] */0
+                              ]
+                            ]
+                          ], /* [] */0),
+                      /* :: */[
+                        g(/* None */0, /* None */0, /* [] */0, map(viewRoomCircle, model[/* rooms */1])),
+                        /* [] */0
+                      ]
+                    ]),
+                /* [] */0
+              ]),
+          /* :: */[
+            div$2(/* None */0, /* None */0, /* :: */[
+                  class$prime("info"),
+                  /* [] */0
+                ], /* :: */[
+                  viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
+                  /* [] */0
+                ]),
+            /* [] */0
+          ]
+        ]);
+  var match$1 = model[/* menuVisible */4];
+  var viewContent = match$1 !== 0 ? div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
+          ul(/* None */0, /* None */0, /* [] */0, /* :: */[
+                li(/* None */0, /* None */0, /* [] */0, /* :: */[
+                      a$1(/* None */0, /* None */0, /* :: */[
+                            onClick(/* SetPage */__(2, [/* Map */0])),
+                            /* [] */0
+                          ], /* :: */[
+                            text$2("OpenSpace Map"),
+                            /* [] */0
+                          ]),
+                      /* [] */0
+                    ]),
+                /* :: */[
+                  li(/* None */0, /* None */0, /* [] */0, /* :: */[
+                        a$1(/* None */0, /* None */0, /* :: */[
+                              onClick(/* SetPage */__(2, [/* Upcoming */1])),
+                              /* [] */0
+                            ], /* :: */[
+                              text$2("Upcoming"),
+                              /* [] */0
+                            ]),
+                        /* [] */0
+                      ]),
+                  /* [] */0
+                ]
+              ]),
+          /* [] */0
+        ]) : viewPage;
   return div$2(/* None */0, /* None */0, /* :: */[
               class$prime(""),
               /* [] */0
             ], /* :: */[
-              div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                    div$2(/* None */0, /* None */0, /* [] */0, /* :: */[
-                          svg(/* None */0, /* None */0, /* :: */[
-                                width("100vw"),
-                                /* :: */[
-                                  height("69vh"),
-                                  /* [] */0
-                                ]
-                              ], /* :: */[
-                                svgimage(/* None */0, /* None */0, /* :: */[
-                                      xlinkHref("./floorplan.jpg"),
-                                      /* :: */[
-                                        width("100vw"),
-                                        /* :: */[
-                                          height("69vh"),
-                                          /* [] */0
-                                        ]
-                                      ]
-                                    ], /* [] */0),
-                                /* :: */[
-                                  g(/* None */0, /* None */0, /* [] */0, map(viewRoomCircle, model[/* rooms */1])),
-                                  /* [] */0
-                                ]
-                              ]),
+              div$2(/* None */0, /* None */0, /* :: */[
+                    class$prime("hero"),
+                    /* [] */0
+                  ], /* :: */[
+                    h1(/* None */0, /* None */0, /* [] */0, /* :: */[
+                          text$2("Socrates Be OpenSpace"),
                           /* [] */0
                         ]),
                     /* :: */[
-                      div$2(/* None */0, /* None */0, /* :: */[
-                            class$prime("info"),
-                            /* [] */0
-                          ], /* :: */[
-                            viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
-                            /* [] */0
-                          ]),
+                      viewHamburger,
                       /* [] */0
                     ]
                   ]),
-              /* [] */0
+              /* :: */[
+                viewContent,
+                /* [] */0
+              ]
             ]);
 }
 
@@ -3364,6 +3488,8 @@ function main(param, param$1) {
   return standardProgram(partial_arg, param, param$1);
 }
 
+var toggleMenu = /* ToggleMenu */0;
+
 
 /* No side effect */
 
@@ -3371,6 +3497,8 @@ exports.decodeFromGoogleSheets = decodeFromGoogleSheets;
 exports.decodeSlots = decodeSlots;
 exports.activateRoom = activateRoom;
 exports.initializeSlots = initializeSlots;
+exports.toggleMenu = toggleMenu;
+exports.setPage = setPage;
 exports.Room = Room;
 exports.init = init;
 exports.safeFind = safeFind;
