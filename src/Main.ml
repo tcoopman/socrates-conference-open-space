@@ -187,46 +187,34 @@ let viewRoomCircle room =
 
   ]
 
-let viewSlot slot =
+let viewSlot withRoom slot =
   let module Html = Tea.Html in
   let twitterUrl =
     let twitter = slot.ownerTwitter in
     {j|https://twitter.com/$(twitter)|j}
   in
   Html.div [Html.class' "slot"] [
-    Html.div [Html.class' "slot-header"] [Html.h2 [] [Html.text slot.name]; Html.span [] [Html.text (Js.Date.toLocaleString slot.start)]];
-    Html.span [] [Html.text slot.description];
-    Html.span [] [Html.text slot.owner];
-    Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
+    Html.div [Html.class' "slot-header"] [
+      Html.h2 [] [Html.text slot.name]; 
+      Html.div [Html.class' "slot-extra-info"] [
+        Html.span [] [Html.text (Js.Date.toLocaleString slot.start)];
+        (if withRoom then Html.span [] [Html.a [Html.onClick (setPage Map)] [ Html.text slot.roomName]] else Html.noNode);
+        Html.span [] [Html.text slot.owner];
+        Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
+      ];
+    ];
+    Html.div [] [Html.text slot.description];
+    Html.div [] [
+    ];
   ]
 
 
 let viewUpcoming slots =
   let module Html = Tea.Html in
-  let viewSlot slot =
-    let twitterUrl =
-      let twitter = slot.ownerTwitter in
-      {j|https://twitter.com/$(twitter)|j}
-    in
-    Html.div [Html.class' "slot"] [
-      Html.div [Html.class' "slot-header"] [
-        Html.h2 [] [Html.text slot.name]; 
-        Html.div [Html.class' "slot-extra-info"] [
-          Html.span [] [Html.text (Js.Date.toLocaleString slot.start)];
-          Html.span [] [Html.a [Html.onClick (setPage Map)] [ Html.text slot.roomName]];
-          Html.span [] [Html.text slot.owner];
-          Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
-        ];
-      ];
-      Html.div [] [Html.text slot.description];
-      Html.div [] [
-      ];
-    ]
-  in
   let upComing = 
     List.filter (fun slot -> (compareAsc slot.start (Js.Date.make ())) > 0) slots
     |> List.sort (fun a b -> compareAsc a.start b.start) in
-  Html.div [] [Html.div [] (List.map (viewSlot) upComing) ]
+  Html.div [] [Html.div [] (List.map (viewSlot true) upComing) ]
 
 
 let viewSlotInfoForRoom slots room =
@@ -234,7 +222,7 @@ let viewSlotInfoForRoom slots room =
   let viewSlots slots =
     match slots with
     | [] -> [Html.div [] [Html.text "No slots booked for this room"]]
-    | _ -> List.map viewSlot slots
+    | _ -> List.map (viewSlot false) slots
   in
   match room with
   | None -> 

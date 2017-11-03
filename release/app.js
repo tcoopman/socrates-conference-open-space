@@ -8350,7 +8350,7 @@ function viewRoomCircle(room) {
     var str = __WEBPACK_IMPORTED_MODULE_10_bs_platform_lib_es6_pervasives_js__["e" /* string_of_float */](b);
     return __WEBPACK_IMPORTED_MODULE_3_bs_platform_lib_es6_curry_js__["a" /* _1 */](a, "" + (String(str) + "%"));
   };
-  return __WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* onClick */]( /* ActivateRoom */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](0, [room[/* name */0]])),
+  return __WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* ActivateRoom */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](0, [room[/* name */0]])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["b" /* rect */]( /* None */0, /* None */0, /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["h" /* x */], room[/* x */2]),
   /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["j" /* y */], room[/* y */3]),
   /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */], room[/* width */4]),
@@ -8368,70 +8368,54 @@ function viewRoomCircle(room) {
   /* [] */0]]);
 }
 
-function viewSlot(slot) {
+function viewSlot(withRoom, slot) {
   var twitter = slot[/* ownerTwitter */5];
   var twitterUrl = "https://twitter.com/" + (String(twitter) + "");
   return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot"),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-header"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* name */0]),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* name */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* start */2].toLocaleString()),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-extra-info"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* start */2].toLocaleString()),
   /* [] */0]),
+  /* :: */[withRoom ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* roomName */3]),
+  /* [] */0]),
+  /* [] */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* noNode */],
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* owner */4]),
+  /* [] */0]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */](twitterUrl),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* ownerTwitter */5]),
+  /* [] */0]),
+  /* [] */0]),
+  /* [] */0]]]]),
   /* [] */0]]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* description */1]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* description */1]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* owner */4]),
-  /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */](twitterUrl),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* ownerTwitter */5]),
-  /* [] */0]),
-  /* [] */0]),
-  /* [] */0]]]]);
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
+  /* [] */0]]]);
 }
 
 function viewUpcoming(slots) {
-  var viewSlot = function (slot) {
-    var twitter = slot[/* ownerTwitter */5];
-    var twitterUrl = "https://twitter.com/" + (String(twitter) + "");
-    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot"),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-header"),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* name */0]),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-extra-info"),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* start */2].toLocaleString()),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* roomName */3]),
-    /* [] */0]),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* owner */4]),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */](twitterUrl),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* ownerTwitter */5]),
-    /* [] */0]),
-    /* [] */0]),
-    /* [] */0]]]]),
-    /* [] */0]]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](slot[/* description */1]),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
-    /* [] */0]]]);
-  };
   var upComing = __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["i" /* sort */](function (a, b) {
     return __WEBPACK_IMPORTED_MODULE_9_date_fns__["compareAsc"](a[/* start */2], b[/* start */2]);
   }, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["a" /* filter */](function (slot) {
     return +(__WEBPACK_IMPORTED_MODULE_9_date_fns__["compareAsc"](slot[/* start */2], new Date()) > 0);
   })(slots));
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewSlot, upComing)),
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
+    return viewSlot( /* true */1, param);
+  }, upComing)),
   /* [] */0]);
 }
 
 function viewSlotInfoForRoom(slots, room) {
   var viewSlots = function (slots) {
     if (slots) {
-      return __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewSlot, slots);
+      return __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
+        return viewSlot( /* false */0, param);
+      }, slots);
     } else {
-      return (/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("No slots booked for this room"),
+      return (/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("No slots booked for this room"),
         /* [] */0]),
         /* [] */0]
       );
@@ -8442,19 +8426,19 @@ function viewSlotInfoForRoom(slots, room) {
     var slots$1 = __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["a" /* filter */](function (slot) {
       return +(slot[/* roomName */3] === room$1[/* name */0]);
     })(slots);
-    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](room$1[/* name */0]),
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](room$1[/* name */0]),
     /* [] */0]),
     /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, viewSlots(slots$1)),
     /* [] */0]]);
   } else {
-    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("Click on a room to see the booked slots"),
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Click on a room to see the booked slots"),
     /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* p */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("Click "),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* p */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Click "),
     /* [] */0]),
     /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("here"),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
     /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */](" to update the slots"),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](" to update the slots"),
     /* [] */0]),
     /* [] */0]]]),
     /* [] */0]]);
@@ -8465,10 +8449,10 @@ function view(model) {
   var class$prime = model[/* menuVisible */4] ? "open" : "";
   var viewHamburger = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* id */]("hamburger"),
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](class$prime),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* onClick */]( /* ToggleMenu */0),
-  /* [] */0]]], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* ToggleMenu */0),
+  /* [] */0]]], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* [] */0]]]);
   var match = model[/* page */3];
   var viewPage = match !== 0 ? viewUpcoming(model[/* data */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
@@ -8485,19 +8469,19 @@ function view(model) {
   /* [] */0]),
   /* [] */0]]);
   var match$1 = model[/* menuVisible */4];
-  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("OpenSpace Map"),
+  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["n" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("OpenSpace Map"),
   /* [] */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Upcoming */1])),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("Upcoming"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Upcoming */1])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Upcoming"),
   /* [] */0]),
   /* [] */0]),
   /* [] */0]]),
   /* [] */0]) : viewPage;
   return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](""),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("hero"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* text */]("Socrates Be OpenSpace"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Socrates Be OpenSpace"),
   /* [] */0]),
   /* :: */[viewHamburger,
   /* [] */0]]),
@@ -12067,15 +12051,15 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 
 "use strict";
 /* unused harmony export Cmds */
-/* unused harmony export noNode */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return text; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return noNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return text; });
 /* unused harmony export lazy1 */
 /* unused harmony export node */
 /* unused harmony export br */
 /* unused harmony export br$prime */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return div; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return span; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return p; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return span; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return p; });
 /* unused harmony export pre */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return a; });
 /* unused harmony export section */
@@ -12093,7 +12077,7 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 /* unused harmony export input$prime */
 /* unused harmony export textarea */
 /* unused harmony export label */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return ul; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return ul; });
 /* unused harmony export ol */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return li; });
 /* unused harmony export table */
@@ -12143,7 +12127,7 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 /* unused harmony export onInput */
 /* unused harmony export onChangeOpt */
 /* unused harmony export onChange */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return onClick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return onClick; });
 /* unused harmony export onDoubleClick */
 /* unused harmony export onBlur */
 /* unused harmony export onFocus */

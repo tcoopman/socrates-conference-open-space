@@ -75,14 +75,15 @@ h2 {
 
 .slot-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 .slot-extra-info {
+    flex: 0 0 150px;
     display: flex;
     flex-direction: column;
     font-size: 13px;
     line-height: 17px;
+    text-align: right;
 }
 .slot-extra-info a {
     cursor: auto;
