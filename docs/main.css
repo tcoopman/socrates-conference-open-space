@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 
-h1, h2, h3, span, p, a, li {
+h1, h2, h3, span, p, a, li, div {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
@@ -67,13 +67,28 @@ h2 {
 .slot {
     padding-bottom: 0.5em;
     border-bottom: 1px solid #5d40ec;
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
+    margin-top: 0.8em;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .slot-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+}
+.slot-extra-info {
+    flex: 0 0 150px;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    line-height: 17px;
+    text-align: right;
+}
+.slot-extra-info a {
+    cursor: auto;
+    text-decoration: underline;
+    color: #5d40ec;
 }
 .hero {
     background-color: rgb(38, 38, 39);
