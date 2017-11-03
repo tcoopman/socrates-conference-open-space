@@ -5,13 +5,11 @@
     "clean": "bsb -clean",
     "clean:all": "bsb -clean-world",
     "build:bsb": "bsb -make-world",
-    "build:js": "rollup -c",
     "serve": "serve release",
     "build": "run-s build:bsb build:js",
     "watch:bsb": "bsb -make-world -w",
-    "watch:js": "rollup -c -w",
-    "watch": "run-p watch:bsb watch:js serve",
-    "start": "run-s watch"
+    "start": "run-p watch:bsb webpack serve",
+    "webpack": "webpack --watch --color"
   },
   "keywords": [
     "Bucklescript"
@@ -21,13 +19,17 @@
     "bs-platform": "^2.0.0",
     "bucklescript-tea": "git://github.com/tcoopman/bucklescript-tea.git#patch-3",
     "npm-run-all": "^4.1.0",
-    "rollup": "^0.50.0",
-    "rollup-plugin-livereload": "^0.6.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
     "serve": "^6.3.1"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "bs-fetch": "^0.2.0",
-    "bs-json": "^0.2.3"
+    "bs-json": "^0.2.3",
+    "css-loader": "^0.28.7",
+    "date-fns": "^1.29.0",
+    "file-loader": "^1.1.5",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1"
   }
 }

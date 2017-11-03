@@ -1,8 +1,12 @@
+external compareAsc : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"]
+
 type slot = {
   name: string;
   description: string;
   start: Js.Date.t;
   roomName: string;
+  owner: string;
+  ownerTwitter: string;
 }
 let decodeFromGoogleSheets json =
   Json.Decode.{
@@ -10,6 +14,8 @@ let decodeFromGoogleSheets json =
     description = json |> at ["gsx$description"; "$t"] string;
     start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
     roomName = json |> at ["gsx$roomname"; "$t"] string;
+    owner = json |> at ["gsx$owner"; "$t"] string;
+    ownerTwitter = json |> at ["gsx$ownertwitter"; "$t"] string;
   }
 
 let decodeSlots json =
@@ -181,14 +187,50 @@ let viewRoomCircle room =
 
   ]
 
-let viewSlotInfoForRoom slots room =
+let viewSlot slot =
+  let module Html = Tea.Html in
+  let twitterUrl =
+    let twitter = slot.ownerTwitter in
+    {j|https://twitter.com/$(twitter)|j}
+  in
+  Html.div [Html.class' "slot"] [
+    Html.div [Html.class' "slot-header"] [Html.h2 [] [Html.text slot.name]; Html.span [] [Html.text (Js.Date.toLocaleString slot.start)]];
+    Html.span [] [Html.text slot.description];
+    Html.span [] [Html.text slot.owner];
+    Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
+  ]
+
+
+let viewUpcoming slots =
   let module Html = Tea.Html in
   let viewSlot slot =
+    let twitterUrl =
+      let twitter = slot.ownerTwitter in
+      {j|https://twitter.com/$(twitter)|j}
+    in
     Html.div [Html.class' "slot"] [
-      Html.div [Html.class' "slot-header"] [Html.h2 [] [Html.text slot.name]; Html.span [] [Html.text (Js.Date.toLocaleString slot.start)]];
-      Html.span [] [Html.text slot.description];
+      Html.div [Html.class' "slot-header"] [
+        Html.h2 [] [Html.text slot.name]; 
+        Html.div [Html.class' "slot-extra-info"] [
+          Html.span [] [Html.text (Js.Date.toLocaleString slot.start)];
+          Html.span [] [Html.a [Html.onClick (setPage Map)] [ Html.text slot.roomName]];
+          Html.span [] [Html.text slot.owner];
+          Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
+        ];
+      ];
+      Html.div [] [Html.text slot.description];
+      Html.div [] [
+      ];
     ]
   in
+  let upComing = 
+    List.filter (fun slot -> (compareAsc slot.start (Js.Date.make ())) > 0) slots
+    |> List.sort (fun a b -> compareAsc a.start b.start) in
+  Html.div [] [Html.div [] (List.map (viewSlot) upComing) ]
+
+
+let viewSlotInfoForRoom slots room =
+  let module Html = Tea.Html in
   let viewSlots slots =
     match slots with
     | [] -> [Html.div [] [Html.text "No slots booked for this room"]]
@@ -235,8 +277,7 @@ let view model =
         ];
         Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
       ]
-    | Upcoming -> 
-      Html.div [] [Html.text "Todo"]
+    | Upcoming -> viewUpcoming model.data
   in
   let viewContent =
     match model.menuVisible with
