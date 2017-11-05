@@ -2,36 +2,38 @@ external compareAsc : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"
 external startOfHour : Js.Date.t -> Js.Date.t = "" [@@bs.module "date-fns"]
 external isEqual : Js.Date.t -> Js.Date.t -> bool = "" [@@bs.module "date-fns"]
 
-type slot = {
-  name: string;
-  description: string;
-  start: Js.Date.t;
-  roomName: string;
-  owner: string;
-  ownerTwitter: string;
-}
-let decodeFromGoogleSheets json =
-  Json.Decode.{
-    name = json |> at ["gsx$name"; "$t"] string;
-    description = json |> at ["gsx$description"; "$t"] string;
-    start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
-    roomName = json |> at ["gsx$roomname"; "$t"] string;
-    owner = json |> at ["gsx$owner"; "$t"] string;
-    ownerTwitter = json |> at ["gsx$ownertwitter"; "$t"] string;
+module Slot = struct 
+  type t = {
+    name: string;
+    description: string;
+    start: Js.Date.t;
+    roomName: string;
+    owner: string;
+    ownerTwitter: string;
   }
+  let decodeFromGoogleSheets json =
+    Json.Decode.{
+      name = json |> at ["gsx$name"; "$t"] string;
+      description = json |> at ["gsx$description"; "$t"] string;
+      start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
+      roomName = json |> at ["gsx$roomname"; "$t"] string;
+      owner = json |> at ["gsx$owner"; "$t"] string;
+      ownerTwitter = json |> at ["gsx$ownertwitter"; "$t"] string;
+    }
 
-let decodeSlots json =
-  let slots = Json.Decode.(
-    json |> at ["feed"; "entry"] (array decodeFromGoogleSheets);
-  )
-  in
-  slots |> Array.to_list
+  let decodeSlots json =
+    let slots = Json.Decode.(
+      json |> at ["feed"; "entry"] (array decodeFromGoogleSheets);
+    )
+    in
+    slots |> Array.to_list
 
-let current slots =
-  List.filter (fun slot -> (
-    let start = startOfHour (Js.Date.make ()) in
-    isEqual start slot.start
-  )) slots
+  let current slots =
+    List.filter (fun slot -> (
+      let start = startOfHour (Js.Date.make ()) in
+      isEqual start slot.start
+    )) slots
+end
 
 type page = 
   | Loading
@@ -41,7 +43,7 @@ type page =
   | Info
 
 type msg =
-  | InitializeSlots of slot list
+  | InitializeSlots of Slot.t list
   | ToggleMenu
   | SetPage of page
   [@@bs.deriving {accessors}]
@@ -60,7 +62,7 @@ end
 
 
 type model = {
-  slots: slot list;
+  slots: Slot.t list;
   rooms: Room.t list;
   page: page;
   menuVisible: bool;
@@ -75,7 +77,7 @@ let init () =
         |> then_ Fetch.Response.json
         |> then_ (fun json -> 
           Js.log json;
-          !callbacks.enqueue (initializeSlots (decodeSlots json));
+          !callbacks.enqueue (initializeSlots (Slot.decodeSlots json));
           resolve ()
         )
       ) |> ignore
@@ -175,7 +177,7 @@ let safeFind f l =
 
 let update model = function 
   | InitializeSlots slots ->
-    let page = if List.length (current slots) > 0 then Current else Upcoming in
+    let page = if List.length (Slot.current slots) > 0 then Current else Upcoming in
     ({model with slots = slots; page}, Tea.Cmd.none)
   | ToggleMenu ->
     ({model with menuVisible = not model.menuVisible}, Tea.Cmd.none)
@@ -187,7 +189,7 @@ let update model = function
 let viewSlot withRoom slot =
   let module Html = Tea.Html in
   let twitterUrl =
-    let twitter = slot.ownerTwitter in
+    let twitter = slot.Slot.ownerTwitter in
     {j|https://twitter.com/$(twitter)|j}
   in
   Html.div [Html.class' "slot"] [
@@ -208,13 +210,13 @@ let viewSlot withRoom slot =
 let viewUpcoming slots =
   let module Html = Tea.Html in
   let upComing = 
-    List.filter (fun slot -> (compareAsc slot.start (Js.Date.make ())) > 0) slots
-    |> List.sort (fun a b -> compareAsc a.start b.start) in
+    List.filter (fun slot -> (compareAsc slot.Slot.start (Js.Date.make ())) > 0) slots
+    |> List.sort (fun a b -> compareAsc a.Slot.start b.start) in
   Html.div [] [Html.div [] (List.map (viewSlot true) upComing) ]
 
 let viewCurrent slots =
   let module Html = Tea.Html in
-  Html.div [] [Html.div [] (List.map (viewSlot true) (current slots)) ]
+  Html.div [] [Html.div [] (List.map (viewSlot true) (Slot.current slots)) ]
 
 let viewInfo =
   let module Html = Tea.Html in
@@ -254,7 +256,7 @@ let viewSlotInfoForRoom slots room =
       ] 
     ];
   | Some room -> 
-      let slots = List.filter (fun slot -> slot.roomName == room.Room.name) slots in
+      let slots = List.filter (fun slot -> slot.Slot.roomName == room.Room.name) slots in
       Html.div [] [
         Html.h1 [] [Html.text room.Room.name];
         Html.div [] (viewSlots slots)

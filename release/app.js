@@ -8090,9 +8090,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__Main_bs__["a" /* main */])(document.body);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export decodeFromGoogleSheets */
-/* unused harmony export decodeSlots */
-/* unused harmony export current */
+/* unused harmony export Slot */
 /* unused harmony export initializeSlots */
 /* unused harmony export toggleMenu */
 /* unused harmony export setPage */
@@ -8179,6 +8177,11 @@ function current(slots) {
     return +__WEBPACK_IMPORTED_MODULE_9_date_fns__["isEqual"](start, slot[/* start */2]);
   })(slots);
 }
+
+var Slot = /* module */[
+/* decodeFromGoogleSheets */decodeFromGoogleSheets,
+/* decodeSlots */decodeSlots,
+/* current */current];
 
 function initializeSlots(param_0) {
   return (/* InitializeSlots */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](0, [param_0])
