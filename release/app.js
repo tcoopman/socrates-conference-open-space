@@ -8104,6 +8104,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__Main_bs__["a" /* main */])(document.body);
 /* unused harmony export viewSlot */
 /* unused harmony export viewUpcoming */
 /* unused harmony export viewCurrent */
+/* unused harmony export viewInfo */
 /* unused harmony export viewSlotInfoForRoom */
 /* unused harmony export view */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return main; });
@@ -8188,9 +8189,10 @@ var Room = /* module */[];
 
 function init() {
   var initCmds = __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["b" /* call */](function (callbacks) {
-    fetch("https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json").then(function (prim) {
+    fetch("/dev_app.json").then(function (prim) {
       return prim.json();
     }).then(function (json) {
+      console.log(json);
       __WEBPACK_IMPORTED_MODULE_3_bs_platform_lib_es6_curry_js__["a" /* _1 */](callbacks[0][/* enqueue */0], /* InitializeSlots */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [decodeSlots(json)]));
       return Promise.resolve( /* () */0);
     });
@@ -8420,6 +8422,14 @@ function viewCurrent(slots) {
   /* [] */0]);
 }
 
+var viewInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Link to wiki"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Phone numbers"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Regular info"),
+/* [] */0]),
+/* [] */0]]]);
+
 function viewSlotInfoForRoom(slots, room) {
   var viewSlots = function (slots) {
     if (slots) {
@@ -8490,6 +8500,9 @@ function view(model) {
     case 2:
       viewPage = viewCurrent(model[/* data */0]);
       break;
+    case 3:
+      viewPage = viewInfo;
+      break;
 
   }
   var match$1 = model[/* menuVisible */4];
@@ -8497,15 +8510,19 @@ function view(model) {
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Current"),
   /* [] */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("OpenSpace Map"),
-  /* [] */0]),
-  /* [] */0]),
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Upcoming */1])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Upcoming"),
   /* [] */0]),
   /* [] */0]),
-  /* [] */0]]]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("OpenSpace Map"),
+  /* [] */0]),
+  /* [] */0]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Info */3])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Info"),
+  /* [] */0]),
+  /* [] */0]),
+  /* [] */0]]]]),
   /* [] */0]) : viewPage;
   return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](""),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("hero"),
@@ -8533,7 +8550,7 @@ function main(param, param$1) {
 var toggleMenu = /* ToggleMenu */0;
 
 
-/* date-fns Not a pure module */
+/* viewInfo Not a pure module */
 
 /***/ }),
 /* 78 */

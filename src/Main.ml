@@ -27,7 +27,7 @@ let decodeSlots json =
   in
   slots |> Array.to_list
 
-type page = Map | Upcoming | Current
+type page = Map | Upcoming | Current | Info
 
 type msg =
   | ActivateRoom of string
@@ -61,9 +61,11 @@ let init () =
   let initCmds =
     Tea.Cmd.call (fun callbacks -> 
       Js.Promise.(
-        Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json"
+        (* Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json" *)
+        Fetch.fetch "/dev_app.json"
         |> then_ Fetch.Response.json
         |> then_ (fun json -> 
+          Js.log json;
           !callbacks.enqueue (initializeSlots (decodeSlots json));
           resolve ()
         )
@@ -228,6 +230,14 @@ let viewCurrent slots =
   in
   Html.div [] [Html.div [] (List.map (viewSlot true) current) ]
 
+let viewInfo =
+  let module Html = Tea.Html in
+  Html.div [] [
+    Html.div [] [Html.text "Link to wiki"] ;
+    Html.div [] [Html.text "Phone numbers"] ;
+    Html.div [] [Html.text "Regular info"] ;
+  ]
+
 let viewSlotInfoForRoom slots room =
   let module Html = Tea.Html in
   let viewSlots slots =
@@ -278,6 +288,7 @@ let view model =
       ]
     | Upcoming -> viewUpcoming model.data
     | Current -> viewCurrent model.data
+    | Info -> viewInfo
   in
   let viewContent =
     match model.menuVisible with
@@ -287,8 +298,9 @@ let view model =
       Html.div [] [
         Html.ul [] [
           Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current" ]];
-          Html.li [] [ Html.a [Html.onClick (setPage Map) ] [ Html.text "OpenSpace Map" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage Map) ] [ Html.text "OpenSpace Map" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage Info) ] [ Html.text "Info" ]];
         ]
       ]
   in
