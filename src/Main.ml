@@ -233,6 +233,18 @@ let viewCurrent slots =
 let viewInfo =
   let module Html = Tea.Html in
   Html.div [] [
+    Html.div [] [
+      Html.h1 [] [Html.text "Openspace info"];
+      Html.h2 [] [Html.text "The first morning"];
+      Html.span [] [Html.text "We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "];
+      Html.a [Html.onClick (setPage Map)] [Html.text "Sambre & Meuse"];
+      Html.h2 [] [Html.text "Update the openspace"];
+      Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
+    ];
+    Html.div [] [
+      Html.h1 [] [Html.text "Update the openspace"];
+      Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
+    ];
     Html.div [] [Html.text "Link to wiki"] ;
     Html.div [] [Html.text "Phone numbers"] ;
     Html.div [] [Html.text "Regular info"] ;
@@ -262,10 +274,23 @@ let viewSlotInfoForRoom slots room =
         Html.div [] (viewSlots slots)
       ]
 
-let view model =
+let viewMap model =
   let module Html = Tea.Html in
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
+  Html.div [] [
+    Html.div [] [
+      Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
+        Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100vw"; SvgA.height "69vh"] [];
+        Svg.g [] (List.map viewRoomCircle model.rooms)
+      ];
+    ];
+    Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
+  ]
+
+
+let view model =
+  let module Html = Tea.Html in
   let viewHamburger =
     let class' = if model.menuVisible then "open" else "" in
     Html.div [Html.id "hamburger"; Html.class' class'; Html.onClick toggleMenu] [
@@ -276,16 +301,7 @@ let view model =
   in
   let viewPage =
     match model.page with
-    | Map ->
-      Html.div [] [
-        Html.div [] [
-          Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
-            Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100vw"; SvgA.height "69vh"] [];
-            Svg.g [] (List.map viewRoomCircle model.rooms)
-          ];
-        ];
-        Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
-      ]
+    | Map -> viewMap model
     | Upcoming -> viewUpcoming model.data
     | Current -> viewCurrent model.data
     | Info -> viewInfo

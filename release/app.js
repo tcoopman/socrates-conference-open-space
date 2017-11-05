@@ -8106,6 +8106,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__Main_bs__["a" /* main */])(document.body);
 /* unused harmony export viewCurrent */
 /* unused harmony export viewInfo */
 /* unused harmony export viewSlotInfoForRoom */
+/* unused harmony export viewMap */
 /* unused harmony export view */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return main; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__ = __webpack_require__(3);
@@ -8422,13 +8423,34 @@ function viewCurrent(slots) {
   /* [] */0]);
 }
 
-var viewInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Link to wiki"),
+var viewInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Openspace info"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("The first morning"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
+/* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Sambre & Meuse"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Update the openspace"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
+/* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
+/* [] */0]),
+/* [] */0]]]]]]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Update the openspace"),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
+/* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
+/* [] */0]),
+/* [] */0]]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Link to wiki"),
 /* [] */0]),
 /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Phone numbers"),
 /* [] */0]),
 /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Regular info"),
 /* [] */0]),
-/* [] */0]]]);
+/* [] */0]]]]]);
 
 function viewSlotInfoForRoom(slots, room) {
   var viewSlots = function (slots) {
@@ -8467,6 +8489,22 @@ function viewSlotInfoForRoom(slots, room) {
   }
 }
 
+function viewMap(model) {
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
+  /* [] */0]], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["d" /* svgimage */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["i" /* xlinkHref */]("./floorplan.jpg"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
+  /* [] */0]]], /* [] */0),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewRoomCircle, model[/* rooms */1])),
+  /* [] */0]]),
+  /* [] */0]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
+  /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
+  /* [] */0]),
+  /* [] */0]]);
+}
+
 function view(model) {
   var class$prime = model[/* menuVisible */4] ? "open" : "";
   var viewHamburger = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* id */]("hamburger"),
@@ -8480,19 +8518,7 @@ function view(model) {
   var viewPage;
   switch (match) {
     case 0:
-      viewPage = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
-      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
-      /* [] */0]], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["d" /* svgimage */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["i" /* xlinkHref */]("./floorplan.jpg"),
-      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
-      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
-      /* [] */0]]], /* [] */0),
-      /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewRoomCircle, model[/* rooms */1])),
-      /* [] */0]]),
-      /* [] */0]),
-      /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
-      /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
-      /* [] */0]),
-      /* [] */0]]);
+      viewPage = viewMap(model);
       break;
     case 1:
       viewPage = viewUpcoming(model[/* data */0]);
