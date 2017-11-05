@@ -7,6 +7,7 @@
     "build:bsb": "bsb -make-world",
     "serve": "serve release",
     "build": "run-s build:bsb build:js",
+    "build:js": "webpack --config webpack.prod.js --optimize-minimize",
     "watch:bsb": "bsb -make-world -w",
     "start": "run-p watch:bsb webpack serve",
     "webpack": "webpack --watch --color"
@@ -30,6 +31,7 @@
     "date-fns": "^1.29.0",
     "file-loader": "^1.1.5",
     "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1"
   }
 }
