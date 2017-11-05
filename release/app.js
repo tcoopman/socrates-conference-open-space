@@ -8095,6 +8095,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__Main_bs__["a" /* main */])(document.body);
 /* unused harmony export toggleMenu */
 /* unused harmony export setPage */
 /* unused harmony export Room */
+/* unused harmony export fetchSlots */
 /* unused harmony export init */
 /* unused harmony export safeFind */
 /* unused harmony export update */
@@ -8195,18 +8196,19 @@ function setPage(param_0) {
 
 var Room = /* module */[];
 
-function init() {
-  var initCmds = __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["b" /* call */](function (callbacks) {
-    fetch("/dev_app.json").then(function (prim) {
-      return prim.json();
-    }).then(function (json) {
-      console.log(json);
-      __WEBPACK_IMPORTED_MODULE_3_bs_platform_lib_es6_curry_js__["a" /* _1 */](callbacks[0][/* enqueue */0], /* InitializeSlots */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](0, [decodeSlots(json)]));
-      return Promise.resolve( /* () */0);
-    });
-    return (/* () */0
-    );
+var fetchSlots = __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["b" /* call */](function (callbacks) {
+  fetch("/dev_app.json").then(function (prim) {
+    return prim.json();
+  }).then(function (json) {
+    console.log(json);
+    __WEBPACK_IMPORTED_MODULE_3_bs_platform_lib_es6_curry_js__["a" /* _1 */](callbacks[0][/* enqueue */0], /* InitializeSlots */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](0, [decodeSlots(json)]));
+    return Promise.resolve( /* () */0);
   });
+  return (/* () */0
+  );
+});
+
+function init() {
   return (/* tuple */[
     /* record */[
     /* slots : [] */0,
@@ -8292,7 +8294,7 @@ function init() {
     /* height */8],
     /* [] */0]]]]]]]]]],
     /* page : Loading */0,
-    /* menuVisible : false */0], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["a" /* batch */]( /* :: */[initCmds,
+    /* menuVisible : false */0], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["a" /* batch */]( /* :: */[fetchSlots,
     /* [] */0])]
   );
 }
@@ -8317,21 +8319,26 @@ function update(model, param) {
       /* menuVisible */1 - model[/* menuVisible */3]], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
     );
   } else if (param.tag) {
+    var page = param[0];
+    var cmds = typeof page === "number" ? page === 2 || page === 1 ? __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["a" /* batch */]( /* :: */[fetchSlots,
+    /* [] */0]) : __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */] : __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["a" /* batch */]( /* :: */[fetchSlots,
+    /* [] */0]);
     return (/* tuple */[
       /* record */[
       /* slots */model[/* slots */0],
       /* rooms */model[/* rooms */1],
-      /* page */param[0],
-      /* menuVisible : false */0], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
+      /* page */page,
+      /* menuVisible : false */0], cmds]
     );
   } else {
     var slots = param[0];
-    var page = __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["f" /* length */](current(slots)) > 0 ? /* Current */2 : /* Upcoming */1;
+    var match = model[/* page */2];
+    var page$1 = typeof match === "number" && match === 0 ? __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["f" /* length */](current(slots)) > 0 ? /* Current */2 : /* Upcoming */1 : model[/* page */2];
     return (/* tuple */[
       /* record */[
       /* slots */slots,
       /* rooms */model[/* rooms */1],
-      /* page */page,
+      /* page */page$1,
       /* menuVisible */model[/* menuVisible */3]], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
     );
   }
@@ -8572,7 +8579,7 @@ function main(param, param$1) {
 var toggleMenu = /* ToggleMenu */0;
 
 
-/* viewInfo Not a pure module */
+/* fetchSlots Not a pure module */
 
 /***/ }),
 /* 78 */

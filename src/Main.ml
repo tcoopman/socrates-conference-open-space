@@ -68,8 +68,7 @@ type model = {
   menuVisible: bool;
 }
 
-let init () = 
-  let initCmds =
+let fetchSlots =
     Tea.Cmd.call (fun callbacks -> 
       Js.Promise.(
         (* Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json" *)
@@ -82,7 +81,8 @@ let init () =
         )
       ) |> ignore
     )
-  in
+
+let init () = 
   ({
   page = Loading;
   menuVisible = false;
@@ -169,7 +169,7 @@ let init () =
     };
   ];
   slots = []
-}, Tea.Cmd.batch [initCmds])
+}, Tea.Cmd.batch [fetchSlots])
 
 let safeFind f l = 
   try Some (List.find f l)
@@ -177,12 +177,23 @@ let safeFind f l =
 
 let update model = function 
   | InitializeSlots slots ->
-    let page = if List.length (Slot.current slots) > 0 then Current else Upcoming in
+    let page = 
+      match model.page with
+      | Loading -> if List.length (Slot.current slots) > 0 then Current else Upcoming
+      | _ -> model.page
+    in
     ({model with slots = slots; page}, Tea.Cmd.none)
   | ToggleMenu ->
     ({model with menuVisible = not model.menuVisible}, Tea.Cmd.none)
   | SetPage page ->
-    ({model with page = page; menuVisible = false}, Tea.Cmd.none)
+    let cmds = match page with
+      | Current -> Tea.Cmd.batch [fetchSlots]
+      | Upcoming -> Tea.Cmd.batch [fetchSlots]
+      | Map _ -> Tea.Cmd.batch [fetchSlots]
+      | Loading -> Tea.Cmd.none
+      | Info -> Tea.Cmd.none
+    in
+    ({model with page = page; menuVisible = false}, cmds)
 
 
 
