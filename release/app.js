@@ -8347,28 +8347,28 @@ function update(model, param) {
 function viewSlot(withRoom, slot) {
   var twitter = slot[/* ownerTwitter */5];
   var twitterUrl = "https://twitter.com/" + (String(twitter) + "");
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-header"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* name */0]),
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("content slot"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-header"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* name */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("slot-extra-info"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-extra-info"),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* start */2].toLocaleString()),
   /* [] */0]),
-  /* :: */[withRoom ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[slot[/* roomName */3]]]])),
+  /* :: */[withRoom ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[slot[/* roomName */3]]]])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* roomName */3]),
   /* [] */0]),
-  /* [] */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* noNode */],
+  /* [] */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* noNode */],
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* owner */4]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */](twitterUrl),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* href */](twitterUrl),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* ownerTwitter */5]),
   /* [] */0]),
   /* [] */0]),
   /* [] */0]]]]),
   /* [] */0]]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* description */1]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* description */1]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* [] */0]]]);
 }
 
@@ -8378,47 +8378,66 @@ function viewUpcoming(slots) {
   }, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["a" /* filter */](function (slot) {
     return +(__WEBPACK_IMPORTED_MODULE_9_date_fns__["compareAsc"](slot[/* start */2], new Date()) > 0);
   })(slots));
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
     return viewSlot( /* true */1, param);
   }, upComing)),
   /* [] */0]);
 }
 
 function viewCurrent(slots) {
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
-    return viewSlot( /* true */1, param);
-  }, current(slots))),
-  /* [] */0]);
+  var current$1 = current(slots);
+  if (current$1) {
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("content"),
+    /* [] */0], __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
+      return viewSlot( /* true */1, param);
+    }, current$1));
+  } else {
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("content"),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("There are currently no active sessions."),
+    /* [] */0]),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* br */]( /* [] */0),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Go to "),
+    /* [] */0]]),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Upcoming */1])),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("upcoming"),
+    /* [] */0]),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](" or the "),
+    /* [] */0]),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* None */0]])),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("openspace map"),
+    /* [] */0]),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](" to view more."),
+    /* [] */0]),
+    /* [] */0]]]]]]);
+  }
 }
 
-var viewInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Openspace info"),
+var viewInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("content"),
+/* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Openspace info"),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("The first morning"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("The first morning"),
 /* [] */0]),
 /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */["Sambre et Meuse"]]])),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */["Sambre et Meuse"]]])),
 /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Sambre & Meuse"),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Update the openspace"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Update the openspace"),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("You can update the slots of the openspace over "),
+/* [] */0]),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
 /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
 /* [] */0]),
-/* [] */0]]]]]]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Update the openspace"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](". Please only update your own slots only."),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
-/* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Link to wiki"),
 /* [] */0]),
-/* [] */0]]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Link to wiki"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Phone numbers"),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Phone numbers"),
+/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Regular info"),
 /* [] */0]),
-/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Regular info"),
-/* [] */0]),
-/* [] */0]]]]]);
+/* [] */0]]]]]]]]]]]);
 
 function viewSlotInfoForRoom(slots, room) {
   var viewSlots = function (slots) {
@@ -8427,7 +8446,7 @@ function viewSlotInfoForRoom(slots, room) {
         return viewSlot( /* false */0, param);
       }, slots);
     } else {
-      return (/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("No slots booked for this room"),
+      return (/* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("No slots booked for this room"),
         /* [] */0]),
         /* [] */0]
       );
@@ -8438,22 +8457,14 @@ function viewSlotInfoForRoom(slots, room) {
     var slots$1 = __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["a" /* filter */](function (slot) {
       return +(slot[/* roomName */3] === room$1[/* name */0]);
     })(slots);
-    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](room$1[/* name */0]),
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](room$1[/* name */0]),
     /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, viewSlots(slots$1)),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, viewSlots(slots$1)),
     /* [] */0]]);
   } else {
-    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Click on a room to see the booked slots"),
+    return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Click on a room to see the booked slots"),
     /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* p */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Click "),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* href */]("https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"),
-    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("here"),
-    /* [] */0]),
-    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](" to update the slots"),
-    /* [] */0]),
-    /* [] */0]]]),
-    /* [] */0]]);
+    /* [] */0]);
   }
 }
 
@@ -8469,7 +8480,7 @@ function viewMap(model, roomOption) {
       return __WEBPACK_IMPORTED_MODULE_3_bs_platform_lib_es6_curry_js__["a" /* _1 */](a, "" + (String(str) + "%"));
     };
     var strokeWidth = activeRoom && activeRoom[0] === room ? "2.5" : "1";
-    return __WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[room[/* name */0]]]])),
+    return __WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[room[/* name */0]]]])),
     /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["b" /* rect */]( /* None */0, /* None */0, /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["h" /* x */], room[/* x */2]),
     /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["j" /* y */], room[/* y */3]),
     /* :: */[$less$(__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */], room[/* width */4]),
@@ -8486,7 +8497,7 @@ function viewMap(model, roomOption) {
     /* [] */0]),
     /* [] */0]]);
   };
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
   /* :: */[__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
   /* [] */0]], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["d" /* svgimage */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["i" /* xlinkHref */]("./floorplan.jpg"),
   /* :: */[__WEBPACK_IMPORTED_MODULE_13_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
@@ -8495,20 +8506,20 @@ function viewMap(model, roomOption) {
   /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewRoomCircle, model[/* rooms */1])),
   /* [] */0]]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("info"),
   /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* slots */0], activeRoom),
   /* [] */0]),
   /* [] */0]]);
 }
 
-var viewLoading = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Loading"),
+var viewLoading = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Loading"),
 /* [] */0]);
 
 function view(model) {
   var class$prime = model[/* menuVisible */3] ? "open" : "";
-  var viewHamburger = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* id */]("hamburger"),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](class$prime),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* ToggleMenu */0),
+  var viewHamburger = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* id */]("hamburger"),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */](class$prime),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* ToggleMenu */0),
   /* [] */0]]], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
@@ -8535,27 +8546,27 @@ function view(model) {
     viewPage = viewMap(model, match[0]);
   }
   var match$1 = model[/* menuVisible */3];
-  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["n" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Current */2])),
+  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["n" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Current */2])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Current"),
   /* [] */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Upcoming */1])),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Upcoming */1])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Upcoming"),
   /* [] */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* None */0]])),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* None */0]])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("OpenSpace Map"),
   /* [] */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Info */3])),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["i" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Info */3])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Info"),
   /* [] */0]),
   /* [] */0]),
   /* [] */0]]]]),
   /* [] */0]) : viewPage;
-  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](""),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("hero"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Socrates Be OpenSpace"),
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */](""),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("hero"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["e" /* h1 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Socrates Be OpenSpace"),
   /* [] */0]),
   /* :: */[viewHamburger,
   /* [] */0]]),
@@ -12125,22 +12136,22 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 
 "use strict";
 /* unused harmony export Cmds */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return noNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return noNode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return text; });
 /* unused harmony export lazy1 */
 /* unused harmony export node */
-/* unused harmony export br */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return br; });
 /* unused harmony export br$prime */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return div; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return div; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return span; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return p; });
+/* unused harmony export p */
 /* unused harmony export pre */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return a; });
 /* unused harmony export section */
 /* unused harmony export header */
 /* unused harmony export footer */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return h1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return h2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return h1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return h2; });
 /* unused harmony export h3 */
 /* unused harmony export h4 */
 /* unused harmony export h5 */
@@ -12153,7 +12164,7 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 /* unused harmony export label */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return ul; });
 /* unused harmony export ol */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return li; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return li; });
 /* unused harmony export table */
 /* unused harmony export thead */
 /* unused harmony export tfoot */
@@ -12177,10 +12188,10 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 /* unused harmony export summary */
 /* unused harmony export time */
 /* unused harmony export noProp */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return id; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return href; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return id; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return href; });
 /* unused harmony export src */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return class$prime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return class$prime; });
 /* unused harmony export classList */
 /* unused harmony export type$prime */
 /* unused harmony export style */
@@ -12201,7 +12212,7 @@ var noNode = __WEBPACK_IMPORTED_MODULE_0__vdom_js__["d" /* noNode */];
 /* unused harmony export onInput */
 /* unused harmony export onChangeOpt */
 /* unused harmony export onChange */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return onClick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return onClick; });
 /* unused harmony export onDoubleClick */
 /* unused harmony export onBlur */
 /* unused harmony export onFocus */

@@ -203,7 +203,7 @@ let viewSlot withRoom slot =
     let twitter = slot.Slot.ownerTwitter in
     {j|https://twitter.com/$(twitter)|j}
   in
-  Html.div [Html.class' "slot"] [
+  Html.div [Html.class' "content slot"] [
     Html.div [Html.class' "slot-header"] [
       Html.h2 [] [Html.text slot.name]; 
       Html.div [Html.class' "slot-extra-info"] [
@@ -227,26 +227,33 @@ let viewUpcoming slots =
 
 let viewCurrent slots =
   let module Html = Tea.Html in
-  Html.div [] [Html.div [] (List.map (viewSlot true) (Slot.current slots)) ]
+  match Slot.current slots with
+  | [] -> 
+    Html.div [Html.class' "content"] [
+      Html.span [] [ Html.text "There are currently no active sessions." ];
+      Html.span [] [ Html.br []; Html.text "Go to "];
+      Html.a [Html.onClick (setPage Upcoming)] [Html.text "upcoming"];
+      Html.span [] [ Html.text " or the "];
+      Html.a [Html.onClick (setPage (Map None))] [Html.text "openspace map"];
+      Html.span [] [Html.text " to view more."];
+    ]
+  | current -> 
+    Html.div [Html.class' "content"] (List.map (viewSlot true) current)
 
 let viewInfo =
   let module Html = Tea.Html in
-  Html.div [] [
-    Html.div [] [
-      Html.h1 [] [Html.text "Openspace info"];
-      Html.h2 [] [Html.text "The first morning"];
-      Html.span [] [Html.text "We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "];
-      Html.a [Html.onClick (setPage (Map (Some  "Sambre et Meuse")))] [Html.text "Sambre & Meuse"];
-      Html.h2 [] [Html.text "Update the openspace"];
-      Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
-    ];
-    Html.div [] [
-      Html.h1 [] [Html.text "Update the openspace"];
-      Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
-    ];
-    Html.div [] [Html.text "Link to wiki"] ;
-    Html.div [] [Html.text "Phone numbers"] ;
-    Html.div [] [Html.text "Regular info"] ;
+  Html.div [Html.class' "content"] [
+    Html.h1 [] [Html.text "Openspace info"];
+    Html.h2 [] [Html.text "The first morning"];
+    Html.span [] [Html.text "We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "];
+    Html.a [Html.onClick (setPage (Map (Some  "Sambre et Meuse")))] [Html.text "Sambre & Meuse"];
+    Html.h2 [] [Html.text "Update the openspace"];
+    Html.span [] [Html.text "You can update the slots of the openspace over "];
+    Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
+    Html.span [] [Html.text ". Please only update your own slots only."];
+    Html.h2 [] [Html.text "Link to wiki"] ;
+    Html.h2 [] [Html.text "Phone numbers"] ;
+    Html.h2 [] [Html.text "Regular info"] ;
   ]
 
 let viewSlotInfoForRoom slots room =
@@ -260,11 +267,6 @@ let viewSlotInfoForRoom slots room =
   | None -> 
     Html.div [] [
       Html.h1 [] [Html.text "Click on a room to see the booked slots"];
-      Html.p [] [
-        Html.span [] [Html.text "Click "];
-        Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
-        Html.span [] [Html.text " to update the slots"];
-      ] 
     ];
   | Some room -> 
       let slots = List.filter (fun slot -> slot.Slot.roomName == room.Room.name) slots in
