@@ -27,7 +27,18 @@ let decodeSlots json =
   in
   slots |> Array.to_list
 
-type page = Map of string option | Upcoming | Current | Info
+let current slots =
+  List.filter (fun slot -> (
+    let start = startOfHour (Js.Date.make ()) in
+    isEqual start slot.start
+  )) slots
+
+type page = 
+  | Loading
+  | Map of string option 
+  | Upcoming 
+  | Current 
+  | Info
 
 type msg =
   | InitializeSlots of slot list
@@ -71,7 +82,7 @@ let init () =
     )
   in
   ({
-  page = Map None;
+  page = Loading;
   menuVisible = false;
   rooms = [
     {
@@ -164,7 +175,8 @@ let safeFind f l =
 
 let update model = function 
   | InitializeSlots slots ->
-    ({model with slots = slots}, Tea.Cmd.none)
+    let page = if List.length (current slots) > 0 then Current else Upcoming in
+    ({model with slots = slots; page}, Tea.Cmd.none)
   | ToggleMenu ->
     ({model with menuVisible = not model.menuVisible}, Tea.Cmd.none)
   | SetPage page ->
@@ -193,7 +205,6 @@ let viewSlot withRoom slot =
     ];
   ]
 
-
 let viewUpcoming slots =
   let module Html = Tea.Html in
   let upComing = 
@@ -203,13 +214,7 @@ let viewUpcoming slots =
 
 let viewCurrent slots =
   let module Html = Tea.Html in
-  let current =
-    List.filter (fun slot -> (
-      let start = startOfHour (Js.Date.make ()) in
-      isEqual start slot.start
-    )) slots
-  in
-  Html.div [] [Html.div [] (List.map (viewSlot true) current) ]
+  Html.div [] [Html.div [] (List.map (viewSlot true) (current slots)) ]
 
 let viewInfo =
   let module Html = Tea.Html in
@@ -289,6 +294,8 @@ let viewMap model roomOption =
     Html.div [Html.class' "info"] [viewSlotInfoForRoom model.slots activeRoom]
   ]
 
+let viewLoading =
+  Tea.Html.div [] [Tea.Html.text "Loading"]
 
 let view model =
   let module Html = Tea.Html in
@@ -306,6 +313,7 @@ let view model =
     | Upcoming -> viewUpcoming model.slots
     | Current -> viewCurrent model.slots
     | Info -> viewInfo
+    | Loading -> viewLoading
   in
   let viewContent =
     match model.menuVisible with
