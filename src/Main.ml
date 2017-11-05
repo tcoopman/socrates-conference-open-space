@@ -27,10 +27,9 @@ let decodeSlots json =
   in
   slots |> Array.to_list
 
-type page = Map | Upcoming | Current | Info
+type page = Map of string option | Upcoming | Current | Info
 
 type msg =
-  | ActivateRoom of string
   | InitializeSlots of slot list
   | ToggleMenu
   | SetPage of page
@@ -52,7 +51,6 @@ end
 type model = {
   data: slot list;
   rooms: Room.t list;
-  activeRoom: Room.t option;
   page: page;
   menuVisible: bool;
 }
@@ -73,9 +71,8 @@ let init () =
     )
   in
   ({
-  activeRoom = None;
-  page = Map;
-  menuVisible = true;
+  page = Map None;
+  menuVisible = false;
   rooms = [
     {
         name= "Lesse";
@@ -166,9 +163,6 @@ let safeFind f l =
   with _ -> None
 
 let update model = function 
-  | ActivateRoom roomName -> 
-    let activeRoom = safeFind (fun room -> room.Room.name == roomName) model.rooms in
-    ({model with activeRoom = activeRoom}, Tea.Cmd.none)
   | InitializeSlots slots ->
     ({model with data = slots}, Tea.Cmd.none)
   | ToggleMenu ->
@@ -177,19 +171,6 @@ let update model = function
     ({model with page = page; menuVisible = false}, Tea.Cmd.none)
 
 
-let viewRoomCircle room =
-  let module Svg = Tea.Svg in
-  let module SvgA = Tea.Svg.Attributes in
-  let module SvgE = Tea.Svg.Events in
-  let (<$) a b = 
-    let str = string_of_float b in
-    a {j|$(str)%|j}
-  in
-  Svg.g [Tea.Html.onClick (activateRoom room.Room.name)] [
-    Svg.rect [SvgA.x <$ room.Room.x; SvgA.y <$ room.y; SvgA.width <$ room.width; SvgA.height <$ room.height; SvgA.stroke "black"; SvgA.strokeWidth "1"; SvgA.fill room.color; ] [];
-    Svg.text' [SvgA.x <$ (room.Room.x +. 1.); SvgA.y <$ (room.y +. 3.); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
-
-  ]
 
 let viewSlot withRoom slot =
   let module Html = Tea.Html in
@@ -202,7 +183,7 @@ let viewSlot withRoom slot =
       Html.h2 [] [Html.text slot.name]; 
       Html.div [Html.class' "slot-extra-info"] [
         Html.span [] [Html.text (Js.Date.toLocaleString slot.start)];
-        (if withRoom then Html.span [] [Html.a [Html.onClick (setPage Map)] [ Html.text slot.roomName]] else Html.noNode);
+        (if withRoom then Html.span [] [Html.a [Html.onClick (setPage (Map (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
         Html.span [] [Html.text slot.owner];
         Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
       ];
@@ -237,7 +218,7 @@ let viewInfo =
       Html.h1 [] [Html.text "Openspace info"];
       Html.h2 [] [Html.text "The first morning"];
       Html.span [] [Html.text "We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "];
-      Html.a [Html.onClick (setPage Map)] [Html.text "Sambre & Meuse"];
+      Html.a [Html.onClick (setPage (Map (Some  "Sambre et Meuse")))] [Html.text "Sambre & Meuse"];
       Html.h2 [] [Html.text "Update the openspace"];
       Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
     ];
@@ -274,10 +255,30 @@ let viewSlotInfoForRoom slots room =
         Html.div [] (viewSlots slots)
       ]
 
-let viewMap model =
+let viewMap model roomOption =
   let module Html = Tea.Html in
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
+  let activeRoom = Js.Option.andThen 
+    (fun [@bs] roomName -> safeFind (fun room -> room.Room.name == roomName) model.rooms)
+    roomOption
+  in
+  let viewRoomCircle room =
+    let module SvgE = Tea.Svg.Events in
+    let (<$) a b = 
+      let str = string_of_float b in
+      a {j|$(str)%|j}
+    in
+    let strokeWidth =
+      match activeRoom with
+        | Some name when name == room -> "2.5"
+        | _ -> "1"
+    in
+    Svg.g [Tea.Html.onClick (setPage (Map (Some room.Room.name)))] [
+      Svg.rect [SvgA.x <$ room.Room.x; SvgA.y <$ room.y; SvgA.width <$ room.width; SvgA.height <$ room.height; SvgA.stroke "black"; SvgA.strokeWidth strokeWidth; SvgA.fill room.color; ] [];
+      Svg.text' [SvgA.x <$ (room.Room.x +. 1.); SvgA.y <$ (room.y +. 3.); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
+    ]
+  in
   Html.div [] [
     Html.div [] [
       Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
@@ -285,7 +286,7 @@ let viewMap model =
         Svg.g [] (List.map viewRoomCircle model.rooms)
       ];
     ];
-    Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
+    Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data activeRoom]
   ]
 
 
@@ -301,7 +302,7 @@ let view model =
   in
   let viewPage =
     match model.page with
-    | Map -> viewMap model
+    | Map roomOption -> viewMap model roomOption
     | Upcoming -> viewUpcoming model.data
     | Current -> viewCurrent model.data
     | Info -> viewInfo
@@ -315,7 +316,7 @@ let view model =
         Html.ul [] [
           Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming" ]];
-          Html.li [] [ Html.a [Html.onClick (setPage Map) ] [ Html.text "OpenSpace Map" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage (Map None)) ] [ Html.text "OpenSpace Map" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Info) ] [ Html.text "Info" ]];
         ]
       ]
