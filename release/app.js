@@ -8103,6 +8103,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__Main_bs__["a" /* main */])(document.body);
 /* unused harmony export viewRoomCircle */
 /* unused harmony export viewSlot */
 /* unused harmony export viewUpcoming */
+/* unused harmony export viewCurrent */
 /* unused harmony export viewSlotInfoForRoom */
 /* unused harmony export view */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return main; });
@@ -8408,6 +8409,17 @@ function viewUpcoming(slots) {
   /* [] */0]);
 }
 
+function viewCurrent(slots) {
+  var current = __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["a" /* filter */](function (slot) {
+    var start = __WEBPACK_IMPORTED_MODULE_9_date_fns__["startOfHour"](new Date());
+    return +__WEBPACK_IMPORTED_MODULE_9_date_fns__["isEqual"](start, slot[/* start */2]);
+  })(slots);
+  return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](function (param) {
+    return viewSlot( /* true */1, param);
+  }, current)),
+  /* [] */0]);
+}
+
 function viewSlotInfoForRoom(slots, room) {
   var viewSlots = function (slots) {
     if (slots) {
@@ -8455,21 +8467,37 @@ function view(model) {
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* [] */0]]]);
   var match = model[/* page */3];
-  var viewPage = match !== 0 ? viewUpcoming(model[/* data */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
-  /* [] */0]], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["d" /* svgimage */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["i" /* xlinkHref */]("./floorplan.jpg"),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
-  /* [] */0]]], /* [] */0),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewRoomCircle, model[/* rooms */1])),
-  /* [] */0]]),
-  /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
-  /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
-  /* [] */0]),
-  /* [] */0]]);
+  var viewPage;
+  switch (match) {
+    case 0:
+      viewPage = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["c" /* svg */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
+      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
+      /* [] */0]], /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["d" /* svgimage */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["i" /* xlinkHref */]("./floorplan.jpg"),
+      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["g" /* width */]("100vw"),
+      /* :: */[__WEBPACK_IMPORTED_MODULE_12_bucklescript_tea_src_tea_svg_attributes_js__["d" /* height */]("69vh"),
+      /* [] */0]]], /* [] */0),
+      /* :: */[__WEBPACK_IMPORTED_MODULE_7_bucklescript_tea_src_tea_svg_js__["a" /* g */]( /* None */0, /* None */0, /* [] */0, __WEBPACK_IMPORTED_MODULE_0_bs_platform_lib_es6_list_js__["g" /* map */](viewRoomCircle, model[/* rooms */1])),
+      /* [] */0]]),
+      /* [] */0]),
+      /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
+      /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* data */0], model[/* activeRoom */2]),
+      /* [] */0]),
+      /* [] */0]]);
+      break;
+    case 1:
+      viewPage = viewUpcoming(model[/* data */0]);
+      break;
+    case 2:
+      viewPage = viewCurrent(model[/* data */0]);
+      break;
+
+  }
   var match$1 = model[/* menuVisible */4];
-  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["n" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
+  var viewContent = match$1 !== 0 ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["n" /* ul */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Current */2])),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Current"),
+  /* [] */0]),
+  /* [] */0]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["h" /* li */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](2, [/* Map */0])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("OpenSpace Map"),
   /* [] */0]),
   /* [] */0]),
@@ -8477,7 +8505,7 @@ function view(model) {
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("Upcoming"),
   /* [] */0]),
   /* [] */0]),
-  /* [] */0]]),
+  /* [] */0]]]),
   /* [] */0]) : viewPage;
   return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */](""),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("hero"),

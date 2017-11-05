@@ -1,4 +1,6 @@
 external compareAsc : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"]
+external startOfHour : Js.Date.t -> Js.Date.t = "" [@@bs.module "date-fns"]
+external isEqual : Js.Date.t -> Js.Date.t -> bool = "" [@@bs.module "date-fns"]
 
 type slot = {
   name: string;
@@ -25,7 +27,7 @@ let decodeSlots json =
   in
   slots |> Array.to_list
 
-type page = Map | Upcoming
+type page = Map | Upcoming | Current
 
 type msg =
   | ActivateRoom of string
@@ -216,6 +218,15 @@ let viewUpcoming slots =
     |> List.sort (fun a b -> compareAsc a.start b.start) in
   Html.div [] [Html.div [] (List.map (viewSlot true) upComing) ]
 
+let viewCurrent slots =
+  let module Html = Tea.Html in
+  let current =
+    List.filter (fun slot -> (
+      let start = startOfHour (Js.Date.make ()) in
+      isEqual start slot.start
+    )) slots
+  in
+  Html.div [] [Html.div [] (List.map (viewSlot true) current) ]
 
 let viewSlotInfoForRoom slots room =
   let module Html = Tea.Html in
@@ -266,6 +277,7 @@ let view model =
         Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data model.activeRoom]
       ]
     | Upcoming -> viewUpcoming model.data
+    | Current -> viewCurrent model.data
   in
   let viewContent =
     match model.menuVisible with
@@ -274,6 +286,7 @@ let view model =
     | true -> 
       Html.div [] [
         Html.ul [] [
+          Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Map) ] [ Html.text "OpenSpace Map" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming" ]];
         ]
