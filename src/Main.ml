@@ -49,7 +49,7 @@ end
 
 
 type model = {
-  data: slot list;
+  slots: slot list;
   rooms: Room.t list;
   page: page;
   menuVisible: bool;
@@ -155,7 +155,7 @@ let init () =
         height=8.;
     };
   ];
-  data = []
+  slots = []
 }, Tea.Cmd.batch [initCmds])
 
 let safeFind f l = 
@@ -164,7 +164,7 @@ let safeFind f l =
 
 let update model = function 
   | InitializeSlots slots ->
-    ({model with data = slots}, Tea.Cmd.none)
+    ({model with slots = slots}, Tea.Cmd.none)
   | ToggleMenu ->
     ({model with menuVisible = not model.menuVisible}, Tea.Cmd.none)
   | SetPage page ->
@@ -286,7 +286,7 @@ let viewMap model roomOption =
         Svg.g [] (List.map viewRoomCircle model.rooms)
       ];
     ];
-    Html.div [Html.class' "info"] [viewSlotInfoForRoom model.data activeRoom]
+    Html.div [Html.class' "info"] [viewSlotInfoForRoom model.slots activeRoom]
   ]
 
 
@@ -303,8 +303,8 @@ let view model =
   let viewPage =
     match model.page with
     | Map roomOption -> viewMap model roomOption
-    | Upcoming -> viewUpcoming model.data
-    | Current -> viewCurrent model.data
+    | Upcoming -> viewUpcoming model.slots
+    | Current -> viewCurrent model.slots
     | Info -> viewInfo
   in
   let viewContent =

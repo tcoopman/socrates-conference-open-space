@@ -8197,7 +8197,7 @@ function init() {
   });
   return (/* tuple */[
     /* record */[
-    /* data : [] */0,
+    /* slots : [] */0,
     /* rooms : :: */[
     /* record */[
     /* name */"Lesse",
@@ -8299,7 +8299,7 @@ function update(model, param) {
   if (typeof param === "number") {
     return (/* tuple */[
       /* record */[
-      /* data */model[/* data */0],
+      /* slots */model[/* slots */0],
       /* rooms */model[/* rooms */1],
       /* page */model[/* page */2],
       /* menuVisible */1 - model[/* menuVisible */3]], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
@@ -8307,7 +8307,7 @@ function update(model, param) {
   } else if (param.tag) {
     return (/* tuple */[
       /* record */[
-      /* data */model[/* data */0],
+      /* slots */model[/* slots */0],
       /* rooms */model[/* rooms */1],
       /* page */param[0],
       /* menuVisible : false */0], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
@@ -8315,7 +8315,7 @@ function update(model, param) {
   } else {
     return (/* tuple */[
       /* record */[
-      /* data */param[0],
+      /* slots */param[0],
       /* rooms */model[/* rooms */1],
       /* page */model[/* page */2],
       /* menuVisible */model[/* menuVisible */3]], __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["c" /* none */]]
@@ -8479,7 +8479,7 @@ function viewMap(model, roomOption) {
   /* [] */0]]),
   /* [] */0]),
   /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["b" /* class$prime */]("info"),
-  /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* data */0], activeRoom),
+  /* [] */0], /* :: */[viewSlotInfoForRoom(model[/* slots */0], activeRoom),
   /* [] */0]),
   /* [] */0]]);
 }
@@ -8498,10 +8498,10 @@ function view(model) {
   if (typeof match === "number") {
     switch (match) {
       case 0:
-        viewPage = viewUpcoming(model[/* data */0]);
+        viewPage = viewUpcoming(model[/* slots */0]);
         break;
       case 1:
-        viewPage = viewCurrent(model[/* data */0]);
+        viewPage = viewCurrent(model[/* slots */0]);
         break;
       case 2:
         viewPage = viewInfo;
