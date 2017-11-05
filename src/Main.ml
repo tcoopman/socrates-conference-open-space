@@ -71,8 +71,7 @@ type model = {
 let fetchSlots =
     Tea.Cmd.call (fun callbacks -> 
       Js.Promise.(
-        (* Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json" *)
-        Fetch.fetch "/dev_app.json"
+        Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json"
         |> then_ Fetch.Response.json
         |> then_ (fun json -> 
           Js.log json;
@@ -203,18 +202,25 @@ let viewSlot withRoom slot =
     let twitter = slot.Slot.ownerTwitter in
     {j|https://twitter.com/$(twitter)|j}
   in
+  let ownerInfo =
+    match (slot.owner, slot.ownerTwitter) with
+    | ("", "") -> Html.noNode
+    | (ownerName, "") ->
+      Html.span [] [Html.text {j|$(ownerName)|j}]
+    | ("", ownerTwitter) ->
+      Html.span [] [Html.a [Html.href twitterUrl] [Html.text ownerTwitter]]
+    | (ownerName, ownerTwitter) ->
+      Html.span [] [Html.text {j|$(ownerName) - |j}; Html.a [Html.href twitterUrl] [Html.text ownerTwitter]]
+  in
   Html.div [Html.class' "content slot"] [
     Html.div [Html.class' "slot-header"] [
       Html.h2 [] [Html.text slot.name]; 
-      Html.div [Html.class' "slot-extra-info"] [
-        Html.span [] [Html.text (Js.Date.toLocaleString slot.start)];
-        (if withRoom then Html.span [] [Html.a [Html.onClick (setPage (Map (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
-        Html.span [] [Html.text slot.owner];
-        Html.span [] [Html.a [Html.href twitterUrl ] [Html.text slot.ownerTwitter]];
-      ];
+      ownerInfo;
     ];
-    Html.div [] [Html.text slot.description];
-    Html.div [] [
+    Html.div [Html.class' "slot-content"] [Html.text slot.description];
+    Html.div [Html.class' "slot-footer"] [
+      Html.div [] [Html.text (Js.Date.toLocaleString slot.start)];
+      (if withRoom then Html.div [] [Html.a [Html.onClick (setPage (Map (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
     ];
   ]
 

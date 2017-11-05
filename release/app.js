@@ -8197,7 +8197,7 @@ function setPage(param_0) {
 var Room = /* module */[];
 
 var fetchSlots = __WEBPACK_IMPORTED_MODULE_5_bucklescript_tea_src_tea_cmd_js__["b" /* call */](function (callbacks) {
-  fetch("/dev_app.json").then(function (prim) {
+  fetch("https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json").then(function (prim) {
     return prim.json();
   }).then(function (json) {
     console.log(json);
@@ -8347,28 +8347,43 @@ function update(model, param) {
 function viewSlot(withRoom, slot) {
   var twitter = slot[/* ownerTwitter */5];
   var twitterUrl = "https://twitter.com/" + (String(twitter) + "");
+  var match = slot[/* owner */4];
+  var match$1 = slot[/* ownerTwitter */5];
+  var ownerInfo;
+  var exit = 0;
+  if (match === "" && match$1 === "") {
+    ownerInfo = __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* noNode */];
+  } else {
+    exit = 1;
+  }
+  if (exit === 1) {
+    ownerInfo = match$1 === "" ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("" + (String(match) + "")),
+    /* [] */0]) : match === "" ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* href */](twitterUrl),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](match$1),
+    /* [] */0]),
+    /* [] */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */]("" + (String(match) + " - ")),
+    /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* href */](twitterUrl),
+    /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](match$1),
+    /* [] */0]),
+    /* [] */0]]);
+  }
   return __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("content slot"),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-header"),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["f" /* h2 */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* name */0]),
   /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-extra-info"),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* start */2].toLocaleString()),
+  /* :: */[ownerInfo,
+  /* [] */0]]),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-content"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* description */1]),
   /* [] */0]),
-  /* :: */[withRoom ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[slot[/* roomName */3]]]])),
+  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["c" /* class$prime */]("slot-footer"),
+  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* start */2].toLocaleString()),
+  /* [] */0]),
+  /* :: */[withRoom ? __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["k" /* onClick */]( /* SetPage */__WEBPACK_IMPORTED_MODULE_2_bs_platform_lib_es6_block_js__["a" /* __ */](1, [/* Map */[/* Some */[slot[/* roomName */3]]]])),
   /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* roomName */3]),
   /* [] */0]),
   /* [] */0]) : __WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["j" /* noNode */],
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* owner */4]),
-  /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["l" /* span */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["a"]( /* None */0, /* None */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["g" /* href */](twitterUrl),
-  /* [] */0], /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* ownerTwitter */5]),
-  /* [] */0]),
-  /* [] */0]),
-  /* [] */0]]]]),
   /* [] */0]]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["m" /* text */](slot[/* description */1]),
-  /* [] */0]),
-  /* :: */[__WEBPACK_IMPORTED_MODULE_8_bucklescript_tea_src_tea_html_js__["d" /* div */]( /* None */0, /* None */0, /* [] */0, /* [] */0),
   /* [] */0]]]);
 }
 
