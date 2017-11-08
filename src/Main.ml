@@ -37,7 +37,7 @@ end
 
 type page = 
   | Loading
-  | Map of string option 
+  | Floorplan of string option 
   | Upcoming 
   | Current 
   | Info
@@ -83,7 +83,7 @@ let fetchSlots =
 
 let init () = 
   ({
-  page = Map None;
+  page = Loading;
   menuVisible = false;
   rooms = [
     {
@@ -196,7 +196,7 @@ let update model = function
     let cmds = match page with
       | Current -> Tea.Cmd.batch [fetchSlots]
       | Upcoming -> Tea.Cmd.batch [fetchSlots]
-      | Map _ -> Tea.Cmd.batch [fetchSlots]
+      | Floorplan _ -> Tea.Cmd.batch [fetchSlots]
       | Loading -> Tea.Cmd.none
       | Info -> Tea.Cmd.none
     in
@@ -228,7 +228,7 @@ let viewSlot withRoom slot =
     Html.div [Html.class' "slot-content"] [Html.text slot.description];
     Html.div [Html.class' "slot-footer"] [
       Html.div [] [Html.text (Js.Date.toLocaleString slot.start)];
-      (if withRoom then Html.div [] [Html.a [Html.onClick (setPage (Map (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
+      (if withRoom then Html.div [] [Html.a [Html.onClick (setPage (Floorplan (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
     ];
   ]
 
@@ -246,9 +246,9 @@ let viewCurrent slots =
     Html.div [Html.class' "content"] [
       Html.span [] [ Html.text "There are currently no active sessions." ];
       Html.span [] [ Html.br []; Html.text "Go to "];
-      Html.a [Html.onClick (setPage Upcoming)] [Html.text "upcoming"];
+      Html.a [Html.onClick (setPage Upcoming)] [Html.text "upcoming sessions"];
       Html.span [] [ Html.text " or the "];
-      Html.a [Html.onClick (setPage (Map None))] [Html.text "openspace map"];
+      Html.a [Html.onClick (setPage (Floorplan None))] [Html.text "floorplan"];
       Html.span [] [Html.text " to view more."];
     ]
   | current -> 
@@ -260,14 +260,40 @@ let viewInfo =
     Html.h1 [] [Html.text "Openspace info"];
     Html.h2 [] [Html.text "The first morning"];
     Html.span [] [Html.text "We expect you to join us at 09:00 for the introduction of the Market Place, and the opening of the Open Space. Find us at the conference room "];
-    Html.a [Html.onClick (setPage (Map (Some  "Sambre et Meuse")))] [Html.text "Sambre & Meuse"];
+    Html.a [Html.onClick (setPage (Floorplan (Some  "Sambre et Meuse")))] [Html.text "Sambre & Meuse"];
     Html.h2 [] [Html.text "Update the openspace"];
     Html.span [] [Html.text "You can update the slots of the openspace over "];
     Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing"] [Html.text "here"];
-    Html.span [] [Html.text ". Please only update your own slots only."];
-    Html.h2 [] [Html.text "Link to wiki"] ;
-    Html.h2 [] [Html.text "Phone numbers"] ;
-    Html.h2 [] [Html.text "Regular info"] ;
+    Html.span [] [Html.text ". Please only update your own slots."];
+    Html.h2 [] [Html.text "Wiki"];
+    Html.span [] [
+      Html.text "Looking for anything else, please check our ";
+      Html.a [Html.href "https://github.com/socratesbe/socratesbe_17/wiki"] [Html.text "wiki"];
+      Html.text "."
+    ];
+    Html.h2 [] [Html.text "Anything else?"];
+    Html.span [] [
+      Html.text "If you experience any problems at any time during the conference, please contact us at ";
+      Html.br [];
+      Html.a [Html.href "tel:+32 498 43 29 67"] [Html.text "+32 498 43 29 67 (Erik)"];
+      Html.br [];
+      Html.a [Html.href "+32 494 59 19 29"] [Html.text "+32 494 59 19 29 (Gien)"];
+      Html.br [];
+      Html.a [Html.href "+32 491 08 06 16"] [Html.text "+32 491 08 06 16 (Thomas)"];
+      Html.br [];
+      Html.a [Html.href "+32 495 69 17 32"] [Html.text "+32 495 69 17 32 (Koen)"];
+      Html.br [];
+      Html.a [Html.href "+32 84 21 94 11 "] [Html.text "+32 84 21 94 11 (Venue)"];
+      Html.br [];
+      Html.br [];
+      Html.text "Any other questions about the conference?";
+      Html.br [];
+      Html.text "Drop us a mail (";
+      Html.a [Html.href "mailto:info@scoratesbe.org"] [Html.text "info@socratesbe.org"];
+      Html.text ") or join socratesBE on slack (";
+      Html.a [Html.href "https://socratesbe.herokuapp.com"] [Html.text "https://socratesbe.herokuapp.com"];
+      Html.text ")."
+    ]
   ]
 
 let viewSlotInfoForRoom slots room =
@@ -289,7 +315,7 @@ let viewSlotInfoForRoom slots room =
         Html.div [] (viewSlots slots)
       ]
 
-let viewMap model roomOption =
+let viewFloorplan model roomOption =
   let module Html = Tea.Html in
   let module Svg = Tea.Svg in
   let module SvgA = Tea.Svg.Attributes in
@@ -308,7 +334,7 @@ let viewMap model roomOption =
         | Some name when name == room -> "2.5"
         | _ -> "1"
     in
-    Svg.g [Tea.Html.onClick (setPage (Map (Some room.Room.name)))] [
+    Svg.g [Tea.Html.onClick (setPage (Floorplan (Some room.Room.name)))] [
       Svg.rect [SvgA.x <$ room.Room.x; SvgA.y <$ room.y; SvgA.width <$ room.width; SvgA.height <$ room.height; SvgA.stroke "black"; SvgA.strokeWidth strokeWidth; SvgA.fill room.color; ] [];
       Svg.text' [SvgA.x <$ (room.Room.x +. 1.); SvgA.y <$ (room.y +. 3.); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
     ]
@@ -340,7 +366,7 @@ let view model =
   in
   let viewPage =
     match model.page with
-    | Map roomOption -> viewMap model roomOption
+    | Floorplan roomOption -> viewFloorplan model roomOption
     | Upcoming -> viewUpcoming model.slots
     | Current -> viewCurrent model.slots
     | Info -> viewInfo
@@ -353,9 +379,9 @@ let view model =
     | true -> 
       Html.div [] [
         Html.ul [] [
-          Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current" ]];
-          Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming" ]];
-          Html.li [] [ Html.a [Html.onClick (setPage (Map None)) ] [ Html.text "OpenSpace Map" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current sessions" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming sessions" ]];
+          Html.li [] [ Html.a [Html.onClick (setPage (Floorplan None)) ] [ Html.text "Floorplan" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Info) ] [ Html.text "Info" ]];
         ]
       ]
