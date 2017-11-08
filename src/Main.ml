@@ -83,30 +83,30 @@ let fetchSlots =
 
 let init () = 
   ({
-  page = Loading;
+  page = Map None;
   menuVisible = false;
   rooms = [
     {
         name= "Lesse";
-        color= "#ccbdcf";
-        x= 30.;
-        y= 2.;
+        color= "#dda8e8";
+        x= 33.;
+        y= 0.5;
         width=16.;
         height=9.;
     };
     {
         name= "LHomme";
         color= "#e2d3d4";
-        x= 54.5;
-        y= 6.;
+        x= 50.5;
+        y= 1.5;
         width=18.5;
         height=9.;
     };
     {
         name= "Semois";
         color= "#bfb15d";
-        x= 61.;
-        y= 13.;
+        x= 62.;
+        y= 12.;
         width=16.;
         height=9.;
     };
@@ -120,15 +120,23 @@ let init () =
     };
     {
         name= "Meuse";
-        color= "#d7b569";
-        x= 33.;
-        y= 41.;
+        color= "#3eaec7";
+        x= 25.;
+        y= 39.;
         width=16.;
         height=9.;
     };
     {
+        name= "Cafeteria";
+        color= "#e9eaa0";
+        x= 37.;
+        y= 51.;
+        width=16.5;
+        height=5.;
+    };
+    {
         name= "Sambre et Meuse";
-        color= "#3eaec7";
+        color= "#207c90";
         x= 6.;
         y= 88.;
         width=33.;
@@ -137,7 +145,7 @@ let init () =
     {
         name= "Wamme";
         color= "#d87d10";
-        x= 50.;
+        x= 55.;
         y= 50.;
         width=16.;
         height=9.;
@@ -153,8 +161,8 @@ let init () =
     {
         name= "Ourthe";
         color= "#c1cac0";
-        x= 65.;
-        y= 56.;
+        x= 72.;
+        y= 54.;
         width=16.;
         height=9.;
     };
@@ -162,7 +170,7 @@ let init () =
         name= "Ambleve";
         color= "#dcd07e";
         x= 63.;
-        y= 92.;
+        y= 91.;
         width=18.;
         height=8.;
     };
@@ -309,6 +317,8 @@ let viewMap model roomOption =
     Html.div [] [
       Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
         Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100vw"; SvgA.height "69vh"] [];
+        Svg.text' [SvgA.x "5%"; SvgA.y "5%"; SvgA.fontSize "18"] [Svg.text "Level 1"];
+        Svg.text' [SvgA.x "5%"; SvgA.y "78%"; SvgA.fontSize "18"] [Svg.text "Level 2"];
         Svg.g [] (List.map viewRoomCircle model.rooms)
       ];
     ];
