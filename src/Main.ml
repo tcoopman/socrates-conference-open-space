@@ -74,7 +74,6 @@ let fetchSlots =
         Fetch.fetch "https://spreadsheets.google.com/feeds/list/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/od6/public/values?alt=json"
         |> then_ Fetch.Response.json
         |> then_ (fun json -> 
-          Js.log json;
           !callbacks.enqueue (initializeSlots (Slot.decodeSlots json));
           resolve ()
         )
@@ -290,8 +289,8 @@ let viewInfo =
       Html.br [];
       Html.text "Drop us a mail (";
       Html.a [Html.href "mailto:info@scoratesbe.org"] [Html.text "info@socratesbe.org"];
-      Html.text ") or join socratesBE on slack (";
-      Html.a [Html.href "https://socratesbe.herokuapp.com"] [Html.text "https://socratesbe.herokuapp.com"];
+      Html.text ") or join us on the #socrates_be channel on the international Software Crafters Slack (";
+      Html.a [Html.href "https://softwarecrafters.slack.com/"] [Html.text "https://softwarecrafters.slack.com/"];
       Html.text ")."
     ]
   ]
@@ -382,6 +381,7 @@ let view model =
           Html.li [] [ Html.a [Html.onClick (setPage Current) ] [ Html.text "Current sessions" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Upcoming) ] [ Html.text "Upcoming sessions" ]];
           Html.li [] [ Html.a [Html.onClick (setPage (Floorplan None)) ] [ Html.text "Floorplan" ]];
+          Html.li [] [ Html.a [Html.href "https://docs.google.com/spreadsheets/d/1CEWwtmuycZFmvOR4nQIoT0r54OfxDguyFGBjRiCi3sg/edit?usp=sharing" ] [ Html.text "Edit sessions" ]];
           Html.li [] [ Html.a [Html.onClick (setPage Info) ] [ Html.text "Info" ]];
         ]
       ]
