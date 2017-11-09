@@ -1,13 +1,13 @@
 external compareAsc : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"]
 external startOfHour : Js.Date.t -> Js.Date.t = "" [@@bs.module "date-fns"]
 external isEqual : Js.Date.t -> Js.Date.t -> bool = "" [@@bs.module "date-fns"]
+external format : Js.Date.t -> string -> string = "" [@@bs.module "date-fns"]
 
 module Slot = struct 
   type t = {
     name: string;
     description: string;
     start: Js.Date.t;
-    startString: string;
     roomName: string;
     owner: string;
     ownerTwitter: string;
@@ -16,7 +16,6 @@ module Slot = struct
     Json.Decode.{
       name = json |> at ["gsx$name"; "$t"] string;
       description = json |> at ["gsx$description"; "$t"] string;
-      startString = json |> at ["gsx$start"; "$t"] string;
       start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
       roomName = json |> at ["gsx$roomname"; "$t"] string;
       owner = json |> at ["gsx$owner"; "$t"] string;
@@ -212,7 +211,7 @@ let viewSlot withRoom slot =
     ];
     Html.div [Html.class' "slot-content"] [Html.text slot.description];
     Html.div [Html.class' "slot-footer"] [
-      Html.div [] [Html.text (Js.Date.toLocaleString slot.start)];
+      Html.div [] [Html.text (format slot.start "ddd HH:mm")];
       (if withRoom then Html.div [] [Html.a [Html.onClick (setPage (Floorplan (Some slot.roomName)))] [ Html.text slot.roomName]] else Html.noNode);
     ];
   ]
