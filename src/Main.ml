@@ -7,6 +7,7 @@ module Slot = struct
     name: string;
     description: string;
     start: Js.Date.t;
+    startString: string;
     roomName: string;
     owner: string;
     ownerTwitter: string;
@@ -15,6 +16,7 @@ module Slot = struct
     Json.Decode.{
       name = json |> at ["gsx$name"; "$t"] string;
       description = json |> at ["gsx$description"; "$t"] string;
+      startString = json |> at ["gsx$start"; "$t"] string;
       start = json |> at ["gsx$start"; "$t"] string |> Js.Date.fromString;
       roomName = json |> at ["gsx$roomname"; "$t"] string;
       owner = json |> at ["gsx$owner"; "$t"] string;
@@ -52,10 +54,10 @@ module Room = struct
   type t = {
     name: string;
     color: string;
-    x: float;
-    y: float;
-    width: float;
-    height: float;
+    x: int;
+    y: int;
+    width: int;
+    height: int;
   }
 
 end
@@ -88,90 +90,74 @@ let init () =
     {
         name= "Lesse";
         color= "#dda8e8";
-        x= 33.;
-        y= 0.5;
-        width=16.;
-        height=9.;
+        x= 33;
+        y= 1;
+        width=16;
+        height=9;
     };
     {
         name= "LHomme";
         color= "#e2d3d4";
-        x= 50.5;
-        y= 1.5;
-        width=18.5;
-        height=9.;
+        x= 50;
+        y= 2;
+        width=19;
+        height=9;
     };
     {
         name= "Semois";
         color= "#bfb15d";
-        x= 62.;
-        y= 12.;
-        width=16.;
-        height=9.;
-    };
-    {
-        name= "Sambre";
-        color= "#5555ff";
-        x= 7.;
-        y= 45.;
-        width=16.;
-        height=9.;
-    };
-    {
-        name= "Meuse";
-        color= "#3eaec7";
-        x= 25.;
-        y= 39.;
-        width=16.;
-        height=9.;
+        x= 62;
+        y= 12;
+        width=16;
+        height=9;
     };
     {
         name= "Cafeteria";
         color= "#e9eaa0";
-        x= 37.;
-        y= 51.;
-        width=16.5;
-        height=5.;
+        x= 37;
+        y= 51;
+        width=16;
+        height=5;
     };
     {
         name= "Sambre et Meuse";
         color= "#207c90";
-        x= 6.;
-        y= 88.;
-        width=33.;
-        height=9.;
+        x= 6;
+        y= 88;
+        width=33;
+        height=9;
     };
     {
         name= "Wamme";
         color= "#d87d10";
-        x= 55.;
-        y= 50.;
-        width=16.;
-        height=9.;
+        x= 55;
+        y= 50;
+        width=16;
+        height=9;
     };
     {
         name= "Vesdre";
         color= "#d99367";
-        x= 40.;
-        y= 90.;
-        width=16.;
-        height=9.;
+        x= 40;
+        y= 90;
+        width=16;
+        height=9;
     };
     {
         name= "Ourthe";
         color= "#c1cac0";
-        x= 72.;
-        y= 54.;
-        width=16.;
-        height=9.;
+        x= 72;
+        y= 54;
+        width=16;
+        height=9;
     };
     {
         name= "Ambleve";
         color= "#dcd07e";
-        x= 63.;
-        y= 91.;
-        width=18.;
-        height=8.;
+        x= 63;
+        y= 91;
+        width=18;
+        height=8;
     };
   ];
   slots = []
@@ -236,7 +222,9 @@ let viewUpcoming slots =
   let upComing = 
     List.filter (fun slot -> (compareAsc slot.Slot.start (Js.Date.make ())) > 0) slots
     |> List.sort (fun a b -> compareAsc a.Slot.start b.start) in
-  Html.div [] [Html.div [] (List.map (viewSlot true) upComing) ]
+  Html.div [] [
+    Html.div [] (List.map (viewSlot true) upComing) 
+  ]
 
 let viewCurrent slots =
   let module Html = Tea.Html in
@@ -325,7 +313,7 @@ let viewFloorplan model roomOption =
   let viewRoomCircle room =
     let module SvgE = Tea.Svg.Events in
     let (<$) a b = 
-      let str = string_of_float b in
+      let str = string_of_int b in
       a {j|$(str)%|j}
     in
     let strokeWidth =
@@ -335,15 +323,15 @@ let viewFloorplan model roomOption =
     in
     Svg.g [Tea.Html.onClick (setPage (Floorplan (Some room.Room.name)))] [
       Svg.rect [SvgA.x <$ room.Room.x; SvgA.y <$ room.y; SvgA.width <$ room.width; SvgA.height <$ room.height; SvgA.stroke "black"; SvgA.strokeWidth strokeWidth; SvgA.fill room.color; ] [];
-      Svg.text' [SvgA.x <$ (room.Room.x +. 1.); SvgA.y <$ (room.y +. 3.); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
+      Svg.text' [SvgA.x <$ (room.Room.x + 1); SvgA.y <$ (room.y + 3); SvgA.alignmentBaseline "central"; SvgA.fontSize "14"] [Svg.text room.name]
     ]
   in
   Html.div [] [
-    Html.div [] [
-      Svg.svg [SvgA.width "100vw"; SvgA.height "69vh"; ] [
-        Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100vw"; SvgA.height "69vh"] [];
+    Html.div [Html.class' "floorplan"] [
+      Svg.svg [SvgA.width "100%"; SvgA.height "69%"; ] [
+        Svg.svgimage [SvgA.xlinkHref "./floorplan.jpg"; SvgA.width "100%"; SvgA.height "100%"] [];
         Svg.text' [SvgA.x "5%"; SvgA.y "5%"; SvgA.fontSize "18"] [Svg.text "Level 1"];
-        Svg.text' [SvgA.x "5%"; SvgA.y "78%"; SvgA.fontSize "18"] [Svg.text "Level 2"];
+        Svg.text' [SvgA.x "5%"; SvgA.y "78%"; SvgA.fontSize "18"] [Svg.text "Level 0"];
         Svg.g [] (List.map viewRoomCircle model.rooms)
       ];
     ];
