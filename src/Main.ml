@@ -1,5 +1,5 @@
 external compareAsc : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"]
-external startOfHour : Js.Date.t -> Js.Date.t = "" [@@bs.module "date-fns"]
+external differenceInHours : Js.Date.t -> Js.Date.t -> int = "" [@@bs.module "date-fns"]
 external isEqual : Js.Date.t -> Js.Date.t -> bool = "" [@@bs.module "date-fns"]
 external format : Js.Date.t -> string -> string = "" [@@bs.module "date-fns"]
 
@@ -31,8 +31,7 @@ module Slot = struct
 
   let current slots =
     List.filter (fun slot -> (
-      let start = startOfHour (Js.Date.make ()) in
-      isEqual start slot.start
+       differenceInHours slot.start (Js.Date.make ()) == 0
     )) slots
 end
 
